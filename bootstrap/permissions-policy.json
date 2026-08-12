@@ -36,7 +36,14 @@
         "logs:DescribeLogGroups",
         "logs:CreateLogGroup",
         "logs:PutRetentionPolicy",
-        "logs:ListTagsForResource"
+        "logs:ListTagsForResource",
+	"dynamodb:DescribeTable",
+        "dynamodb:DescribeContinuousBackups",
+        "dynamodb:DescribeTimeToLive",
+        "dynamodb:ListTagsOfResource",
+        "dynamodb:CreateTable",
+        "dynamodb:UpdateTable",
+        "dynamodb:TagResource"
       ],
       "Resource": "*"
     },
