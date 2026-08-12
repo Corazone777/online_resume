@@ -1,0 +1,23 @@
+# ---- Terraform ----
+# State can contain sensitive values — never commit it
+*.tfstate
+*.tfstate.*
+# Provider plugins and init artifacts
+.terraform/
+.terraform.lock.hcl.backup
+# Your real variable values (the .example is committed instead)
+*.tfvars
+!*.tfvars.example
+# Generated Lambda zip
+build/
+
+# ---- Python ----
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+
+# ---- OS / editor noise ----
+.DS_Store
+*.swp

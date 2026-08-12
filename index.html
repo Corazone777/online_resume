@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name — Developer &amp; DevOps</title>
+  <meta name="description" content="Placeholder description — replace with a one-line summary of who you are." />
+
+  <style>
+    /* ============================================================
+       DESIGN TOKENS
+       Palette: "terminal at dusk" — deep ink background, warm paper
+       text, a single signal-cyan accent (the color of a live cursor).
+       Chosen to evoke infrastructure/terminals without cliché green.
+       ============================================================ */
+    :root {
+      --ink:        #0d1117;   /* background — near-black, slight blue */
+      --ink-soft:   #161b22;   /* raised panels */
+      --line:       #2a313c;   /* hairline dividers */
+      --paper:      #e8e6df;   /* primary text — warm off-white */
+      --muted:      #8b949e;   /* secondary text */
+      --signal:     #4fd6c9;   /* accent — cursor cyan */
+      --signal-dim: #2a7a74;
+
+      --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+      --font-body:    "Inter", ui-sans-serif, system-ui, sans-serif;
+      --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+      --maxw: 780px;
+      --pad: clamp(1.25rem, 4vw, 2.5rem);
+    }
+
+    /* Fonts loaded from Google Fonts. For the S3-hosted version you can keep
+       this CDN link or self-host later; either works. */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { animation: none !important; transition: none !important; }
+    }
+
+    body {
+      margin: 0;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--signal); text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad); }
+
+    /* ---- eyebrow / mono labels (structural, not decorative:
+            they mark section type the way a file header would) ---- */
+    .label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--signal);
+    }
+
+    /* ============================================================
+       HERO
+       ============================================================ */
+    header.hero {
+      border-bottom: 1px solid var(--line);
+      padding: clamp(4rem, 12vh, 8rem) 0 clamp(2.5rem, 8vh, 5rem);
+    }
+    .hero .prompt {
+      font-family: var(--font-mono);
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero .prompt::before { content: "~ $ "; color: var(--signal-dim); }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(2.4rem, 7vw, 4.2rem);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      margin: 0 0 1rem;
+    }
+    .hero h1 .cursor {
+      display: inline-block;
+      width: 0.55ch;
+      height: 0.9em;
+      background: var(--signal);
+      margin-left: 0.1em;
+      transform: translateY(0.08em);
+      animation: blink 1.1s steps(1) infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    .hero .tagline {
+      font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+      color: var(--muted);
+      max-width: 46ch;
+      margin: 0 0 2rem;
+    }
+    .hero .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .btn {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      padding: 0.6rem 1.1rem;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--paper);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn:hover { border-color: var(--signal); color: var(--signal); text-decoration: none; }
+    .btn.primary { border-color: var(--signal-dim); }
+
+    /* ============================================================
+       SECTIONS
+       ============================================================ */
+    section { padding: clamp(2.5rem, 8vh, 4.5rem) 0; border-bottom: 1px solid var(--line); }
+    section h2 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      letter-spacing: -0.01em;
+      margin: 0.6rem 0 1.5rem;
+    }
+
+    /* ---- About ---- */
+    .about p { color: var(--paper); max-width: 60ch; margin: 0 0 1rem; }
+
+    /* ---- Skills grid ---- */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .skill-cell { background: var(--ink-soft); padding: 1.25rem; }
+    .skill-cell h3 {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--signal);
+      margin: 0 0 0.7rem;
+    }
+    .skill-cell ul { list-style: none; margin: 0; padding: 0; }
+    .skill-cell li { color: var(--muted); font-size: 0.9rem; padding: 0.15rem 0; }
+
+    /* ---- Project cards ---- */
+    .project {
+      background: var(--ink-soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .project h3 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      margin: 0 0 0.5rem;
+    }
+    .project p { color: var(--muted); margin: 0 0 1rem; max-width: 62ch; }
+    .stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--signal);
+      border: 1px solid var(--signal-dim);
+      border-radius: 4px;
+      padding: 0.15rem 0.5rem;
+    }
+
+    /* ---- Timeline (experience) — numbering here is real sequence ---- */
+    .timeline { border-left: 2px solid var(--line); margin-left: 0.5rem; padding-left: 1.5rem; }
+    .entry { position: relative; padding-bottom: 1.75rem; }
+    .entry::before {
+      content: "";
+      position: absolute;
+      left: calc(-1.5rem - 6px);
+      top: 0.4rem;
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--signal);
+    }
+    .entry .when { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+    .entry h3 { font-family: var(--font-display); font-size: 1.05rem; margin: 0.2rem 0 0.3rem; }
+    .entry p { color: var(--muted); margin: 0; max-width: 60ch; }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    footer { padding: 2.5rem 0 4rem; }
+    footer .links { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+    footer a { font-family: var(--font-mono); font-size: 0.85rem; }
+    footer .colophon { color: var(--muted); font-size: 0.78rem; margin-top: 1.5rem; font-family: var(--font-mono); }
+
+    /* visitor counter slot — for the Cloud Resume Challenge later */
+    .counter { color: var(--muted); font-family: var(--font-mono); font-size: 0.78rem; margin-top: 0.5rem; }
+    .counter span { color: var(--signal); }
+  </style>
+</head>
+
+<body>
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <div class="wrap">
+      <p class="prompt">whoami</p>
+      <h1>Your Name<span class="cursor" aria-hidden="true"></span></h1>
+      <p class="tagline">
+        Placeholder tagline — one honest sentence about what you do.
+        e.g. "Developer who builds and operates the infrastructure under the app, not just the app."
+      </p>
+      <nav class="actions">
+        <a class="btn primary" href="#projects">View work</a>
+        <a class="btn" href="#contact">Get in touch</a>
+        <a class="btn" href="#">Résumé (PDF)</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= ABOUT ================= -->
+  <section id="about" class="about">
+    <div class="wrap">
+      <p class="label">// about</p>
+      <h2>Short intro</h2>
+      <p>
+        Placeholder paragraph. A few sentences about your background — that you
+        started as a developer and moved into building and operating real
+        infrastructure. Keep it plain and true; we'll write the real version
+        together later.
+      </p>
+      <p>
+        Second placeholder line — what you're looking for or what you care about
+        in the work. Replace this.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= SKILLS ================= -->
+  <section id="skills">
+    <div class="wrap">
+      <p class="label">// stack</p>
+      <h2>What I work with</h2>
+      <div class="skills-grid">
+        <div class="skill-cell">
+          <h3>Containers</h3>
+          <ul><li>Docker</li><li>Compose</li><li>Multi-stage builds</li></ul>
+        </div>
+        <div class="skill-cell">
+          <h3>CI / CD</h3>
+          <ul><li>GitLab CI</li><li>Registry deploys</li><li>Pipelines</li></ul>
+        </div>
+        <div class="skill-cell">
+          <h3>Infra as Code</h3>
+          <ul><li>Ansible</li><li>Terraform</li><li>Vault</li></ul>
+        </div>
+        <div class="skill-cell">
+          <h3>Ops</h3>
+          <ul><li>nginx / TLS</li><li>Prometheus</li><li>Grafana</li></ul>
+        </div>
+        <div class="skill-cell">
+          <h3>Languages</h3>
+          <ul><li>Go</li><li>JavaScript</li><li>Bash</li></ul>
+        </div>
+        <div class="skill-cell">
+          <h3>Networking</h3>
+          <ul><li>WireGuard</li><li>Linux</li><li>DNS</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROJECTS ================= -->
+  <section id="projects">
+    <div class="wrap">
+      <p class="label">// selected work</p>
+      <h2>Projects</h2>
+
+      <article class="project">
+        <h3>Placeholder Project One</h3>
+        <p>
+          One or two lines on what it is and — more importantly — what you did:
+          the problem, your role, the outcome. Replace with your real project
+          (e.g. the containerized app on self-managed infra).
+        </p>
+        <div class="stack">
+          <span class="tag">Docker</span>
+          <span class="tag">GitLab CI</span>
+          <span class="tag">Ansible</span>
+          <span class="tag">nginx</span>
+        </div>
+      </article>
+
+      <article class="project">
+        <h3>Placeholder Project Two</h3>
+        <p>
+          Another placeholder. Keep the focus on what you built and why it was
+          non-trivial. Replace this text later.
+        </p>
+        <div class="stack">
+          <span class="tag">Go</span>
+          <span class="tag">Babylon.js</span>
+          <span class="tag">WebGL</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= EXPERIENCE ================= -->
+  <section id="experience">
+    <div class="wrap">
+      <p class="label">// timeline</p>
+      <h2>Experience</h2>
+      <div class="timeline">
+        <div class="entry">
+          <p class="when">20XX — present</p>
+          <h3>Role / Title — Placeholder</h3>
+          <p>One line on what you did here. Replace with the real thing.</p>
+        </div>
+        <div class="entry">
+          <p class="when">20XX — 20XX</p>
+          <h3>Earlier Role — Placeholder</h3>
+          <p>One line. Replace.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT / FOOTER ================= -->
+  <footer id="contact">
+    <div class="wrap">
+      <p class="label">// contact</p>
+      <h2 style="font-family:var(--font-display);font-weight:600;font-size:clamp(1.4rem,4vw,2rem);margin:0.6rem 0 1.5rem;">Get in touch</h2>
+      <div class="links">
+        <a href="mailto:you@example.com">email</a>
+        <a href="#">github</a>
+        <a href="#">gitlab</a>
+        <a href="#">linkedin</a>
+      </div>
+      <p class="counter">visitors: <span id="visitor-count">—</span></p>
+      <p class="colophon">
+        Static site · hosted on AWS S3 · built as placeholder, content to follow.
+      </p>
+    </div>
+  </footer>
+
+ <!-- Visitor counter — fetches the count from your Lambda Function URL.
+     Swap COUNTER_API for your real URL once the backend is deployed. -->
+<script>
+  (function () {
+    // e.g. https://abcd1234.lambda-url.eu-central-1.on.aws/
+    var COUNTER_API = "https://cztjgciu2465brvyb3srv22cka0rqyca.lambda-url.us-east-1.on.aws/"
+
+    var el = document.getElementById("visitor-count");
+    if (!el) return;
+
+    fetch(COUNTER_API)
+      .then(function (res) {
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        el.textContent = data.count;
+      })
+      .catch(function (err) {
+        el.textContent = "—";
+        console.error("Visitor counter failed:", err);
+      });
+  })();
+</script>
+</body>
+</html>

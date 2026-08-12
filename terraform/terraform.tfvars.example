@@ -1,0 +1,8 @@
+# Copy this to terraform.tfvars and fill in the two auto-named resources.
+# Discover them with the commands in the README.
+function_name = "REPLACE_WITH_LAMBDA_FUNCTION_NAME"
+role_name     = "REPLACE_WITH_EXECUTION_ROLE_NAME"
+
+# These already have sensible defaults in variables.tf; override only if yours differ:
+# table_name     = "visitor_counter"
+# allowed_origin = "https://cv.atlas-arcade-tech.com"
