@@ -1,0 +1,60 @@
+name: Backend CI/CD
+
+# Run only when backend code changes (Lambda, tests, or Terraform).
+on:
+  push:
+    branches: [main]
+    paths:
+      - "visitor_counter/**"
+      - "terraform/**"
+      - ".github/workflows/backend.yml"
+
+# Required for OIDC: lets the job request a token to assume the AWS role.
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: us-east-1
+  AWS_ROLE_ARN: arn:aws:iam::593901683489:role/github-actions-cloud-resume
+
+jobs:
+  test:
+    name: Run Python tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install test deps
+        run: pip install -r visitor_counter/requirements-dev.txt
+
+      - name: Run pytest
+        working-directory: visitor_counter
+        run: pytest -v
+
+  deploy:
+    name: Terraform apply
+    needs: test          # only deploy if tests pass
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (OIDC, no stored keys)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform init
+        working-directory: terraform
+        run: terraform init
+
+      - name: Terraform apply
+        working-directory: terraform
+        run: terraform apply -auto-approve

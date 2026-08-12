@@ -1,0 +1,44 @@
+name: Frontend Deploy
+
+# Run only when the website itself changes.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "index.html"
+      - ".github/workflows/frontend.yml"
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_ROLE_ARN: arn:aws:iam::593901683489:role/github-actions-cloud-resume
+  BUCKET: online-resume.marko
+  BUCKET_REGION: eu-north-1
+  DISTRIBUTION_ID: E15F4XRDETEDGJ
+
+jobs:
+  deploy:
+    name: Sync to S3 + invalidate CloudFront
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: ${{ env.BUCKET_REGION }}
+
+      # Uploads index.html to the same key your site serves from.
+      - name: Sync site to S3
+        run: |
+          aws s3 cp index.html "s3://${BUCKET}/online_resume/index.html" \
+            --region "${BUCKET_REGION}"
+
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id "${DISTRIBUTION_ID}" \
+            --paths "/*"

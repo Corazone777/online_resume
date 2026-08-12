@@ -1,0 +1,59 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "TerraformState",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:ListBucket",
+        "dynamodb:GetItem",
+        "dynamodb:PutItem",
+        "dynamodb:DeleteItem"
+      ],
+      "Resource": [
+        "arn:aws:s3:::cloud-resume-tfstate-593901683489",
+        "arn:aws:s3:::cloud-resume-tfstate-593901683489/*",
+        "arn:aws:dynamodb:us-east-1:593901683489:table/cloud-resume-tf-lock"
+      ]
+    },
+    {
+      "Sid": "ManageBackend",
+      "Effect": "Allow",
+      "Action": [
+        "lambda:*",
+        "dynamodb:DescribeTable",
+        "dynamodb:CreateTable",
+        "dynamodb:UpdateTable",
+        "dynamodb:TagResource",
+        "dynamodb:ListTagsOfResource",
+        "iam:GetRole",
+        "iam:PassRole",
+        "iam:ListRolePolicies",
+        "iam:GetRolePolicy",
+        "iam:ListAttachedRolePolicies",
+        "logs:DescribeLogGroups",
+        "logs:CreateLogGroup",
+        "logs:PutRetentionPolicy",
+        "logs:ListTagsForResource"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "DeployFrontend",
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObject",
+        "s3:DeleteObject",
+        "s3:ListBucket",
+        "cloudfront:CreateInvalidation"
+      ],
+      "Resource": [
+        "arn:aws:s3:::online-resume.marko",
+        "arn:aws:s3:::online-resume.marko/*",
+        "arn:aws:cloudfront::593901683489:distribution/E15F4XRDETEDGJ"
+      ]
+    }
+  ]
+}
