@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>[Your Name] — Game Dev &amp; DevOps</title>
-  <meta name="description" content="[Placeholder — one line: developer who builds real-time 3D in the browser and operates the infrastructure it runs on.]" />
+  <title>[Your Name] — Developer · Interactive &amp; Gamified Software</title>
+  <meta name="description" content="[Placeholder — a developer who builds highly interactive, gamified applications and games, and runs the backend, infrastructure, and Linux behind them.]" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,23 +12,23 @@
 
   <style>
     :root {
-      --viewport:  #0e141a;
-      --panel:     #151d25;
-      --panel-2:   #1a232b;
-      --line:      #263139;
-      --line-soft: #1e2830;
-      --chalk:     #dde4e1;
-      --muted:     #7e8c93;
-      --dim:       #46545b;
-      --select:    #ff8a3c;
-      --select-dim:#a5561f;
+      --viewport:  #15181b;
+      --panel:     #1c2024;
+      --panel-2:   #22272b;
+      --line:      #2c3237;
+      --line-soft: #232a2e;
+      --chalk:     #e6eae8;
+      --muted:     #8a969c;
+      --dim:       #4e5a60;
+      --select:    #12a0a0;
+      --select-dim:#096C6C;
       --live:      #5fb98a;
 
       --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
       --font-body:    "Inter", ui-sans-serif, system-ui, sans-serif;
       --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
-      --maxw: 1080px;
+      --maxw: 1140px;
       --pad: clamp(1.25rem, 4vw, 2.75rem);
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
@@ -54,113 +54,179 @@
       display: inline-flex; align-items: center; gap: 0.6ch; margin: 0;
     }
     .eyebrow::before { content: "//"; color: var(--dim); }
-
     .section-title {
       font-family: var(--font-display); font-weight: 800;
-      font-size: clamp(1.5rem, 3.5vw, 2.1rem); letter-spacing: -0.02em;
-      line-height: 1.05; margin: 0.7rem 0 1.6rem;
+      font-size: clamp(1.6rem, 4vw, 2.4rem); letter-spacing: -0.025em;
+      line-height: 1.04; margin: 0.7rem 0 1rem;
     }
+    .section-lede { color: var(--muted); max-width: 60ch; font-size: 1.05rem; margin: 0 0 2.4rem; }
 
-    /* ===== HERO ===== */
-    .viewport-hero {
-      position: relative; min-height: 100svh;
-      display: flex; flex-direction: column;
-      border-bottom: 1px solid var(--line); overflow: hidden;
+    section { padding: clamp(4rem, 10vh, 7rem) 0; border-bottom: 1px solid var(--line); }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ===== NAV ===== */
+    .topnav {
+      position: sticky; top: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.85rem var(--pad);
+      background: rgba(21,24,27,0.72); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line-soft);
+      font-family: var(--font-mono); font-size: 0.78rem;
     }
-    .viewport-hero::before {
+    .topnav .brand { color: var(--chalk); font-weight: 700; letter-spacing: 0.02em; }
+    .topnav .brand b { color: var(--select); }
+    .topnav .links { display: flex; gap: 1.4rem; }
+    .topnav .links a { color: var(--muted); }
+    .topnav .links a:hover { color: var(--select); text-decoration: none; }
+    @media (max-width: 680px) { .topnav .links { display: none; } }
+
+    /* ===== HERO (SaaS split: pitch + playable demo) ===== */
+    .hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); }
+    .hero::before {
       content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-      background-image:
-        radial-gradient(140% 90% at 50% 8%, rgba(255,138,60,0.10), transparent 46%),
-        linear-gradient(var(--line-soft) 1px, transparent 1px),
-        linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
-      background-size: auto, 48px 48px, 48px 48px;
-      background-position: center;
+      background:
+        radial-gradient(120% 80% at 85% 0%, rgba(18,160,160,0.08), transparent 50%),
+        radial-gradient(90% 90% at 0% 100%, rgba(18,160,160,0.05), transparent 50%);
     }
-    .viewport-hero::after {
-      content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
-      background: radial-gradient(120% 120% at 50% 42%, transparent 45%, var(--viewport) 100%);
+    .hero-inner {
+      position: relative; z-index: 1;
+      max-width: var(--maxw); margin: 0 auto; padding: clamp(2.5rem, 7vh, 5rem) var(--pad) clamp(3rem, 8vh, 5.5rem);
+      display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(1.75rem, 4vw, 3.5rem); align-items: center;
     }
-    #scene { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; display: block; }
+    @media (max-width: 900px) { .hero-inner { grid-template-columns: 1fr; } }
 
-    .vp-topbar {
-      position: relative; z-index: 4;
-      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-      padding: 0.9rem var(--pad); border-bottom: 1px solid var(--line-soft);
-      font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em;
-      color: var(--muted); background: linear-gradient(var(--viewport), transparent);
-    }
-    .vp-topbar .tag { color: var(--select); }
-    .vp-topbar .gizmo { display: flex; gap: 0.9rem; }
-    .vp-topbar .gizmo span:nth-child(1) { color: #d96b6b; }
-    .vp-topbar .gizmo span:nth-child(2) { color: var(--live); }
-    .vp-topbar .gizmo span:nth-child(3) { color: #6b8fd9; }
-
-    .vp-content {
-      position: relative; z-index: 4; flex: 1;
-      display: flex; flex-direction: column; justify-content: center;
-      padding: clamp(1.5rem, 5vh, 3.5rem) var(--pad);
-      max-width: var(--maxw); margin: 0 auto; width: 100%;
-      pointer-events: none;
-    }
-    .vp-content > * { pointer-events: auto; }
-
-    .hero-role {
-      font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.1em;
-      color: var(--muted); margin: 0 0 1.1rem;
-      opacity: 0; animation: fadeUp 0.7s var(--ease) 0.15s forwards;
-    }
-    .hero-role b { color: var(--select); font-weight: 500; }
-
-    .hero-name {
+    .hero-copy .eyebrow { opacity: 0; animation: fadeUp 0.6s var(--ease) 0.1s forwards; }
+    .hero-h1 {
       font-family: var(--font-display); font-weight: 900;
-      font-size: clamp(3rem, 11vw, 7rem); line-height: 0.92;
-      letter-spacing: -0.04em; margin: 0; max-width: 15ch;
-      clip-path: inset(0 100% 0 0);
-      animation: wipe 1s var(--ease) 0.3s forwards;
+      font-size: clamp(2.5rem, 6.2vw, 4.4rem); line-height: 0.98;
+      letter-spacing: -0.035em; margin: 0.9rem 0 0;
+      opacity: 0; animation: fadeUp 0.7s var(--ease) 0.2s forwards;
     }
-    .hero-sub {
-      font-size: clamp(1.05rem, 2.4vw, 1.4rem); color: var(--muted);
-      max-width: 46ch; margin: 1.35rem 0 2.1rem; line-height: 1.5;
-      opacity: 0; animation: fadeUp 0.7s var(--ease) 0.7s forwards;
+    .hero-h1 .hl { color: var(--select); }
+    .hero-p {
+      font-size: clamp(1.05rem, 2vw, 1.28rem); color: var(--muted);
+      max-width: 42ch; margin: 1.3rem 0 2rem; line-height: 1.5;
+      opacity: 0; animation: fadeUp 0.7s var(--ease) 0.4s forwards;
     }
-    .hero-sub b { color: var(--chalk); font-weight: 500; }
-
-    .toolbar { display: flex; flex-wrap: wrap; gap: 0.6rem; opacity: 0; animation: fadeUp 0.7s var(--ease) 0.95s forwards; }
+    .hero-p b { color: var(--chalk); font-weight: 500; }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 0.6rem; opacity: 0; animation: fadeUp 0.7s var(--ease) 0.55s forwards; }
     .btn {
-      font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.03em;
-      padding: 0.7rem 1.2rem; border: 1px solid var(--line); border-radius: 8px;
-      color: var(--chalk); background: rgba(21,29,37,0.65); backdrop-filter: blur(5px);
+      font-family: var(--font-mono); font-size: 0.82rem; letter-spacing: 0.02em;
+      padding: 0.75rem 1.3rem; border: 1px solid var(--line); border-radius: 8px;
+      color: var(--chalk); background: rgba(21,29,37,0.6);
       transition: border-color 0.2s var(--ease), color 0.2s var(--ease), transform 0.2s var(--ease), background 0.2s var(--ease);
     }
     .btn:hover { border-color: var(--select); color: var(--select); text-decoration: none; transform: translateY(-1px); }
     .btn.primary { background: var(--select); border-color: var(--select); color: var(--viewport); font-weight: 700; }
-    .btn.primary:hover { background: #ffa15f; border-color: #ffa15f; color: var(--viewport); }
+    .btn.primary:hover { background: #19c2c2; border-color: #19c2c2; color: var(--viewport); }
 
-    .vp-status {
-      position: relative; z-index: 4;
-      display: flex; flex-wrap: wrap; align-items: center; gap: 0 1.6rem;
-      padding: 0.7rem var(--pad); border-top: 1px solid var(--line-soft);
-      background: linear-gradient(transparent, var(--viewport));
-      font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.06em; color: var(--muted);
+    /* ---- the playable demo panel ---- */
+    .demo {
+      position: relative; border: 1px solid var(--line); border-radius: 14px;
+      background: var(--panel); overflow: hidden;
+      box-shadow: 0 30px 80px -40px rgba(0,0,0,0.8), 0 0 0 1px rgba(18,160,160,0.04);
+      opacity: 0; animation: fadeUp 0.8s var(--ease) 0.5s forwards;
     }
-    .vp-status .stat { display: inline-flex; align-items: center; gap: 0.5ch; }
-    .vp-status .stat b { color: var(--chalk); font-weight: 500; }
-    .vp-status .k { color: var(--dim); }
-    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--live); box-shadow: 0 0 8px var(--live); display: inline-block; }
-    .vp-status .push { margin-left: auto; color: var(--select); }
+    .demo-bar {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--line-soft);
+      font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.06em; color: var(--muted);
+    }
+    .demo-bar .lights { display: flex; gap: 0.4rem; }
+    .demo-bar .lights i { width: 9px; height: 9px; border-radius: 50%; display: block; }
+    .demo-bar .lights i:nth-child(1){ background:#d96b6b; } .demo-bar .lights i:nth-child(2){ background:#e0b25f; } .demo-bar .lights i:nth-child(3){ background:var(--live); }
+    .demo-bar .title { color: var(--chalk); }
+    .demo-bar .hint { color: var(--select); }
+    .demo-stage { position: relative; aspect-ratio: 4 / 3; width: 100%; background: var(--viewport); }
+    @media (max-width: 900px) { .demo-stage { aspect-ratio: 16 / 10; } }
+    #game { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; cursor: pointer; }
+    .demo-foot {
+      display: flex; align-items: center; gap: 1.4rem;
+      padding: 0.55rem 0.9rem; border-top: 1px solid var(--line-soft);
+      font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.05em; color: var(--muted);
+    }
+    .demo-foot b { color: var(--chalk); font-weight: 500; }
+    .demo-foot .k { color: var(--dim); }
+    .demo-foot .push { margin-left: auto; color: var(--select); display: inline-flex; align-items: center; gap: 0.5ch; }
+    .demo-foot .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--live); box-shadow: 0 0 7px var(--live); }
 
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-    @keyframes wipe { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
 
-    /* ===== SECTIONS ===== */
-    section { padding: clamp(3.5rem, 9vh, 6rem) 0; border-bottom: 1px solid var(--line); }
-    .lede { color: var(--chalk); max-width: 62ch; font-size: 1.05rem; margin: 0 0 1.1rem; }
-    .lede.muted { color: var(--muted); }
+    /* ===== ATLAS PRODUCT ===== */
+    .product-head { display: grid; grid-template-columns: 1fr; gap: 0; margin-bottom: 2.6rem; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.6ch; align-self: flex-start;
+      font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--live); border: 1px solid var(--select-dim); border-radius: 999px; padding: 0.25rem 0.75rem; margin-bottom: 1rem;
+    }
+    .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--live); box-shadow: 0 0 7px var(--live); }
 
-    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
-    .reveal.in { opacity: 1; transform: none; }
+    /* editor UI mock */
+    .editor-mock {
+      border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--panel);
+      box-shadow: 0 30px 80px -50px rgba(0,0,0,0.8); margin-bottom: 2.6rem;
+    }
+    .em-bar { display: flex; align-items: center; gap: 0.8rem; padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--line-soft); font-family: var(--font-mono); font-size: 0.68rem; color: var(--muted); }
+    .em-bar .lights { display: flex; gap: 0.4rem; }
+    .em-bar .lights i { width: 9px; height: 9px; border-radius: 50%; display: block; }
+    .em-bar .lights i:nth-child(1){ background:#d96b6b; } .em-bar .lights i:nth-child(2){ background:#e0b25f; } .em-bar .lights i:nth-child(3){ background:var(--live); }
+    .em-bar .tabs { display: flex; gap: 1.1rem; }
+    .em-bar .tabs span.on { color: var(--select); }
+    .em-body { display: grid; grid-template-columns: 190px 1fr 200px; min-height: 340px; }
+    @media (max-width: 760px) { .em-body { grid-template-columns: 1fr; } .em-side.right { display: none; } .em-side.left { display: none; } }
+    .em-side { background: var(--panel-2); padding: 0.9rem; font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
+    .em-side.left { border-right: 1px solid var(--line-soft); }
+    .em-side.right { border-left: 1px solid var(--line-soft); }
+    .em-side h5 { margin: 0 0 0.7rem; font-size: 0.64rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); font-weight: 700; }
+    .em-tree div { padding: 0.28rem 0.4rem; border-radius: 5px; }
+    .em-tree div.sel { background: rgba(18,160,160,0.14); color: var(--select); }
+    .em-tree div span { color: var(--dim); }
+    .em-prop { display: flex; justify-content: space-between; padding: 0.32rem 0; border-bottom: 1px solid var(--line-soft); }
+    .em-prop b { color: var(--chalk); font-weight: 500; }
+    .em-viewport { position: relative; background:
+      radial-gradient(90% 90% at 50% 40%, rgba(18,160,160,0.06), transparent 60%),
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+      background-size: auto, 34px 34px, 34px 34px; background-position: center;
+      display: flex; align-items: center; justify-content: center; min-height: 260px;
+    }
+    .em-viewport svg { width: min(78%, 320px); height: auto; }
+    .em-viewport .vp-label { position: absolute; top: 0.6rem; left: 0.8rem; font-family: var(--font-mono); font-size: 0.64rem; color: var(--muted); }
+    .em-viewport .vp-gizmo { position: absolute; bottom: 0.6rem; right: 0.8rem; font-family: var(--font-mono); font-size: 0.62rem; color: var(--dim); }
 
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+    @media (max-width: 760px) { .features { grid-template-columns: 1fr; } }
+    .feature { background: var(--panel); padding: clamp(1.3rem, 2.5vw, 1.8rem); }
+    .feature .fnum { font-family: var(--font-mono); font-size: 0.7rem; color: var(--select); letter-spacing: 0.1em; }
+    .feature h4 { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; margin: 0.6rem 0 0.4rem; }
+    .feature p { color: var(--muted); font-size: 0.92rem; margin: 0; }
+
+    /* ===== UNDER THE HOOD (architecture) ===== */
+    .arch { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-bottom: 2rem; }
+    .flow {
+      display: flex; flex-wrap: wrap; align-items: stretch; gap: 0.6rem;
+      font-family: var(--font-mono); font-size: 0.78rem;
+    }
+    .node {
+      flex: 1 1 130px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+      padding: 0.9rem; min-width: 120px;
+    }
+    .node .nt { color: var(--select); font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .node .nl { color: var(--chalk); margin-top: 0.35rem; font-family: var(--font-body); font-size: 0.9rem; }
+    .node .ns { color: var(--muted); font-size: 0.72rem; margin-top: 0.2rem; }
+    .arrow { align-self: center; color: var(--dim); font-family: var(--font-mono); }
+    @media (max-width: 680px) { .arrow { transform: rotate(90deg); } .flow { flex-direction: column; } }
+
+    .ops-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem; margin-top: 1.6rem; }
+    @media (max-width: 620px) { .ops-grid { grid-template-columns: 1fr; } }
+    .ops { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 1rem 1.1rem; }
+    .ops .oh { display: flex; align-items: center; gap: 0.6ch; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--select); }
+    .ops p { margin: 0.5rem 0 0; color: var(--muted); font-size: 0.9rem; }
+
+    /* ===== CAPABILITIES ===== */
     .towers { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+    @media (max-width: 760px) { .towers { grid-template-columns: 1fr; } }
     .tower { background: var(--panel); padding: clamp(1.5rem, 3vw, 2.25rem); }
     .tower h3 { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--select); margin: 0 0 0.35rem; }
     .tower .tower-note { font-family: var(--font-mono); font-size: 0.7rem; color: var(--dim); margin: 0 0 1.4rem; }
@@ -170,17 +236,9 @@
     .tower li .idx { font-family: var(--font-mono); font-size: 0.7rem; color: var(--dim); min-width: 2.4ch; }
     .tower li .meta { margin-left: auto; font-family: var(--font-mono); font-size: 0.68rem; color: var(--muted); }
 
-    .project { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: clamp(1.5rem, 3vw, 2.25rem); margin-bottom: 1.1rem; transition: border-color 0.25s var(--ease), transform 0.25s var(--ease); }
-    .project:hover { border-color: var(--select-dim); transform: translateY(-2px); }
-    .project-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
-    .project h3 { font-family: var(--font-display); font-weight: 800; font-size: 1.35rem; letter-spacing: -0.01em; margin: 0; }
-    .project .kind { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--select); }
-    .project p { color: var(--muted); margin: 0.85rem 0 1.25rem; max-width: 66ch; }
-    .project p .live { color: var(--live); font-family: var(--font-mono); font-size: 0.85em; }
-    .stack { display: flex; flex-wrap: wrap; gap: 0.45rem; }
-    .chip { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); border: 1px solid var(--line); border-radius: 5px; padding: 0.2rem 0.6rem; }
-    .chip.hot { color: var(--select); border-color: var(--select-dim); }
-
+    /* ===== ABOUT / EXPERIENCE ===== */
+    .lede { color: var(--chalk); max-width: 62ch; font-size: 1.05rem; margin: 0 0 1.1rem; }
+    .lede.muted { color: var(--muted); }
     .changelog { position: relative; margin-left: 0.5rem; padding-left: 1.75rem; border-left: 1px solid var(--line); }
     .entry { position: relative; padding-bottom: 2rem; }
     .entry:last-child { padding-bottom: 0; }
@@ -190,14 +248,13 @@
     .entry h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; margin: 0.25rem 0 0.35rem; }
     .entry p { color: var(--muted); margin: 0; max-width: 60ch; }
 
-    /* ===== CONTACT FORM ===== */
-    footer { padding: clamp(3.5rem, 9vh, 6rem) 0 3.5rem; }
+    /* ===== CONTACT ===== */
+    footer { padding: clamp(4rem, 10vh, 7rem) 0 3.5rem; }
     .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(1.5rem, 4vw, 3rem); align-items: start; }
-    .contact-intro .lede { margin-bottom: 0.6rem; }
-
+    @media (max-width: 820px) { .contact-grid { grid-template-columns: 1fr; } }
     .form-panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: clamp(1.4rem, 3vw, 2rem); }
     .form-panel .panel-head { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 0 0 1.25rem; display: flex; align-items: center; gap: 0.6ch; }
-    .form-panel .panel-head .dot { width: 6px; height: 6px; }
+    .form-panel .panel-head .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--live); box-shadow: 0 0 7px var(--live); }
     .field { margin-bottom: 1rem; }
     .field label { display: block; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
     .field input, .field textarea {
@@ -210,16 +267,10 @@
     .field input::placeholder, .field textarea::placeholder { color: var(--dim); }
     .field textarea { resize: vertical; min-height: 120px; }
     .form-actions { display: flex; align-items: center; gap: 1rem; margin-top: 0.4rem; }
-    .send-btn {
-      font-family: var(--font-mono); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.03em;
-      padding: 0.72rem 1.4rem; border: 1px solid var(--select); border-radius: 8px;
-      background: var(--select); color: var(--viewport); cursor: pointer;
-      transition: background 0.18s var(--ease), transform 0.18s var(--ease);
-    }
-    .send-btn:hover { background: #ffa15f; transform: translateY(-1px); }
+    .send-btn { font-family: var(--font-mono); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.03em; padding: 0.72rem 1.4rem; border: 1px solid var(--select); border-radius: 8px; background: var(--select); color: var(--viewport); cursor: pointer; transition: background 0.18s var(--ease), transform 0.18s var(--ease); }
+    .send-btn:hover { background: #19c2c2; transform: translateY(-1px); }
     .form-note { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
     .form-note.err { color: #e08a8a; }
-    .form-note.ok { color: var(--live); }
     .form-done { display: none; }
     .form-panel.sent .contact-form { display: none; }
     .form-panel.sent .form-done { display: block; }
@@ -227,172 +278,219 @@
     .form-done p { color: var(--muted); margin: 0; }
 
     .counter-strip { margin-top: 2.75rem; padding-top: 1.5rem; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; align-items: center; gap: 0.75ch; font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
-    .counter-strip .dot { width: 6px; height: 6px; }
+    .counter-strip .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--live); box-shadow: 0 0 7px var(--live); }
     .counter-strip #visitor-count { color: var(--select); font-weight: 700; }
     .counter-strip .note { color: var(--dim); }
     .colophon { margin-top: 1.25rem; font-family: var(--font-mono); font-size: 0.72rem; color: var(--dim); }
 
-    @media (max-width: 820px) { .contact-grid { grid-template-columns: 1fr; } }
-    @media (max-width: 760px) {
-      .towers { grid-template-columns: 1fr; }
-      .vp-topbar .gizmo { display: none; }
-      .vp-status { font-size: 0.64rem; gap: 0 1rem; }
-      .vp-status .push { width: 100%; margin-left: 0; margin-top: 0.4rem; }
-    }
-
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation: none !important; transition: none !important; }
-      .hero-name { clip-path: none; }
-      .hero-role, .hero-sub, .toolbar { opacity: 1; }
       .reveal { opacity: 1; transform: none; }
+      .hero-copy .eyebrow, .hero-h1, .hero-p, .hero-cta, .demo { opacity: 1; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- ==================== HERO ==================== -->
-  <header class="viewport-hero">
-    <canvas id="scene" aria-hidden="true"></canvas>
+  <!-- ===== NAV ===== -->
+  <nav class="topnav">
+    <span class="brand">[your]<b>.name</b></span>
+    <span class="links">
+      <a href="#atlas">Atlas</a>
+      <a href="#build">How it's built</a>
+      <a href="#skills">Capabilities</a>
+      <a href="#contact">Contact</a>
+    </span>
+  </nav>
 
-    <div class="vp-topbar">
-      <span>PERSPECTIVE · <span class="tag">portfolio.scene</span></span>
-      <span class="gizmo"><span>● X</span><span>● Y</span><span>● Z</span></span>
-    </div>
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">developer · interactive systems</p>
+        <h1 class="hero-h1">I build software people want to <span class="hl">play with</span>.</h1>
+        <p class="hero-p">
+          A developer focused on <b>highly interactive, gamified applications and games</b> —
+          and the <b>backend, infrastructure, and Linux</b> that make them ship and stay up.
+          This page is interactive too. <b>The demo on the right is playable →</b>
+        </p>
+        <div class="hero-cta">
+          <a class="btn primary" href="#atlas">See Atlas</a>
+          <a class="btn" href="#contact">Get in touch</a>
+          <a class="btn" href="#" id="resume-link">Résumé (PDF)</a>
+        </div>
+      </div>
 
-    <div class="vp-content">
-      <p class="hero-role">role: <b>game developer</b> × <b>devops engineer</b></p>
-      <h1 class="hero-name">[Your&nbsp;Name]</h1>
-      <p class="hero-sub">
-        I build <b>real-time 3D in the browser</b> — and the <b>infrastructure</b>
-        that ships and runs it. From WebGL render loops down to the pipelines,
-        containers, and servers underneath.
-      </p>
-      <nav class="toolbar">
-        <a class="btn primary" href="#projects">View work</a>
-        <a class="btn" href="#contact">Get in touch</a>
-        <a class="btn" href="#" id="resume-link">Résumé (PDF)</a>
-      </nav>
-    </div>
-
-    <div class="vp-status" role="status" aria-label="viewport telemetry">
-      <span class="stat"><span class="k">fps</span> <b id="fps">—</b></span>
-      <span class="stat"><span class="k">mesh</span> <b>torus-knot</b></span>
-      <span class="stat"><span class="k">points</span> <b id="points">—</b></span>
-      <span class="stat"><span class="k">renderer</span> <b id="renderer">webgl</b></span>
-      <span class="stat push"><span class="dot"></span> deployed via CI/CD</span>
+      <!-- playable demo -->
+      <div class="demo" aria-label="playable mini-game">
+        <div class="demo-bar">
+          <span class="lights"><i></i><i></i><i></i></span>
+          <span class="title">demo · flight</span>
+          <span class="hint">↑ / tap to fly</span>
+        </div>
+        <div class="demo-stage">
+          <canvas id="game" tabindex="0" aria-label="playable mini-game: press up arrow, click, or tap to fly through the gaps"></canvas>
+        </div>
+        <div class="demo-foot">
+          <span><span class="k">score</span> <b id="g-score">0</b></span>
+          <span><span class="k">best</span> <b id="g-best">0</b></span>
+          <span><span class="k">fps</span> <b id="g-fps">—</b></span>
+          <span class="push"><span class="dot"></span> built in vanilla JS</span>
+        </div>
+      </div>
     </div>
   </header>
 
-  <!-- ==================== ABOUT ==================== -->
-  <section id="about">
+  <!-- ===== ATLAS PRODUCT ===== -->
+  <section id="atlas">
     <div class="wrap reveal">
-      <p class="eyebrow">readme</p>
-      <h2 class="section-title">Two disciplines, one stack.</h2>
-      <p class="lede">
-        [Placeholder — a few honest sentences about you. Suggested spine: you
-        started as a developer building interactive 3D tools for the browser,
-        and grew into owning the whole delivery path — containers, CI/CD,
-        servers, and observability — the way a real DevOps engineer would.
-        Keep it plain and true; replace this text.]
+      <span class="badge"><span class="dot"></span> flagship project · live</span>
+      <p class="eyebrow">the product</p>
+      <h2 class="section-title">Atlas — a game engine that lives in the browser.</h2>
+      <p class="section-lede">
+        Atlas is a browser-based 3D game editor. You build scenes, program game
+        logic, import assets, and export a playable game — all in the browser,
+        rendered in real time with Babylon.js and served by a Go backend. No
+        install, no plugins.
       </p>
-      <p class="lede muted">[Second line — what you're looking for, or what you care about in the work. Replace this.]</p>
+
+      <!-- editor UI mock — replace with a real screenshot or screen-recording of Atlas -->
+      <div class="editor-mock">
+        <div class="em-bar">
+          <span class="lights"><i></i><i></i><i></i></span>
+          <span class="tabs"><span class="on">Scene</span><span>Script</span><span>Assets</span><span>Export</span></span>
+        </div>
+        <div class="em-body">
+          <div class="em-side left">
+            <h5>Hierarchy</h5>
+            <div class="em-tree">
+              <div>▸ Scene <span>root</span></div>
+              <div class="sel">&nbsp;&nbsp;◆ Player</div>
+              <div>&nbsp;&nbsp;◆ Terrain</div>
+              <div>&nbsp;&nbsp;▸ Lights <span>2</span></div>
+              <div>&nbsp;&nbsp;▸ Props <span>14</span></div>
+              <div>&nbsp;&nbsp;◆ Camera</div>
+            </div>
+          </div>
+          <div class="em-viewport">
+            <span class="vp-label">PERSPECTIVE · realtime</span>
+            <!-- static wireframe stand-in for the live 3D viewport -->
+            <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true">
+              <g stroke="#e6eae8" stroke-opacity="0.5" stroke-width="1">
+                <path d="M100 24 L156 56 L156 120 L100 152 L44 120 L44 56 Z"/>
+                <path d="M100 24 L100 88 M100 88 L156 120 M100 88 L44 120"/>
+                <path d="M44 56 L100 88 L156 56 M44 120 L100 88"/>
+                <path d="M44 56 L100 24 L156 56 L100 88 Z"/>
+              </g>
+              <g fill="#12a0a0">
+                <circle cx="100" cy="24" r="2.6"/><circle cx="156" cy="56" r="2.6"/>
+                <circle cx="156" cy="120" r="2.6"/><circle cx="100" cy="152" r="2.6"/>
+                <circle cx="44" cy="120" r="2.6"/><circle cx="44" cy="56" r="2.6"/>
+                <circle cx="100" cy="88" r="2.6"/>
+              </g>
+            </svg>
+            <span class="vp-gizmo">x · y · z</span>
+          </div>
+          <div class="em-side right">
+            <h5>Inspector · Player</h5>
+            <div class="em-prop"><span>Position</span><b>0, 1, 0</b></div>
+            <div class="em-prop"><span>Mesh</span><b>capsule</b></div>
+            <div class="em-prop"><span>Script</span><b>move.js</b></div>
+            <div class="em-prop"><span>Collider</span><b>on</b></div>
+            <div class="em-prop"><span>Mass</span><b>1.0</b></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="features">
+        <div class="feature"><div class="fnum">01</div><h4>Real-time 3D</h4><p>A live Babylon.js/WebGL viewport — edit the scene and see it render instantly, right in the browser.</p></div>
+        <div class="feature"><div class="fnum">02</div><h4>Build &amp; program</h4><p>Compose scenes visually and wire up game logic — no separate toolchain, no local setup.</p></div>
+        <div class="feature"><div class="fnum">03</div><h4>Import &amp; export</h4><p>Bring in objects and assets, then export a self-contained, playable game you can download and share.</p></div>
+      </div>
     </div>
   </section>
 
-  <!-- ==================== SKILLS ==================== -->
+  <!-- ===== UNDER THE HOOD ===== -->
+  <section id="build">
+    <div class="wrap reveal">
+      <p class="eyebrow">how it's built</p>
+      <h2 class="section-title">I ship the whole thing — not just the front end.</h2>
+      <p class="section-lede">
+        Atlas isn't only a browser app. I provision, configure, and operate every
+        layer it runs on — the same end-to-end ownership a DevOps engineer brings.
+      </p>
+
+      <div class="arch">
+        <div class="flow">
+          <div class="node"><div class="nt">client</div><div class="nl">Browser</div><div class="ns">Babylon.js · WebGL</div></div>
+          <span class="arrow">→</span>
+          <div class="node"><div class="nt">edge</div><div class="nl">nginx + TLS</div><div class="ns">reverse proxy · Let's Encrypt</div></div>
+          <span class="arrow">→</span>
+          <div class="node"><div class="nt">app</div><div class="nl">Go server</div><div class="ns">Docker container</div></div>
+          <span class="arrow">→</span>
+          <div class="node"><div class="nt">host</div><div class="nl">Linux VPS</div><div class="ns">self-managed</div></div>
+        </div>
+      </div>
+
+      <div class="ops-grid">
+        <div class="ops"><div class="oh">CI/CD</div><p>Push to deploy: pipeline builds the image, ships it to the registry, and rolls it out over SSH — no manual steps.</p></div>
+        <div class="ops"><div class="oh">Infrastructure as code</div><p>The server is fully codified in Ansible; the box itself is defined in Terraform — reproducible from scratch.</p></div>
+        <div class="ops"><div class="oh">Observability</div><p>Prometheus + Grafana with host, uptime, and TLS-expiry metrics — I can see the system's health at a glance.</p></div>
+        <div class="ops"><div class="oh">Networking &amp; security</div><p>Hardened nginx, a firewall, and a hand-configured WireGuard VPN for private access to internal dashboards.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CAPABILITIES ===== -->
   <section id="skills">
     <div class="wrap reveal">
-      <p class="eyebrow">stack</p>
-      <h2 class="section-title">What I work with</h2>
+      <p class="eyebrow">capabilities</p>
+      <h2 class="section-title">Full stack, with an interactive edge.</h2>
       <div class="towers">
         <div class="tower">
-          <h3>Real-time &amp; graphics</h3>
-          <p class="tower-note">// what runs in the browser</p>
+          <h3>Interactive &amp; front-end</h3>
+          <p class="tower-note">// what people touch</p>
           <ul>
-            <li><span class="idx">01</span> Babylon.js <span class="meta">WebGL</span></li>
-            <li><span class="idx">02</span> 3D math &amp; scene graphs <span class="meta">geometry</span></li>
-            <li><span class="idx">03</span> Go <span class="meta">app server</span></li>
+            <li><span class="idx">01</span> Real-time 3D &amp; WebGL <span class="meta">Babylon.js</span></li>
+            <li><span class="idx">02</span> Game loops &amp; interaction <span class="meta">canvas</span></li>
+            <li><span class="idx">03</span> 3D math &amp; scene graphs <span class="meta">geometry</span></li>
             <li><span class="idx">04</span> JavaScript <span class="meta">ES modules</span></li>
-            <li><span class="idx">05</span> Shaders &amp; render loops <span class="meta">GPU</span></li>
-            <li><span class="idx">06</span> Canvas / WebGL <span class="meta">rendering</span></li>
+            <li><span class="idx">05</span> Gamified UX <span class="meta">motion · feel</span></li>
           </ul>
         </div>
         <div class="tower">
-          <h3>Infrastructure &amp; ops</h3>
-          <p class="tower-note">// what it runs on</p>
+          <h3>Backend, infra &amp; Linux</h3>
+          <p class="tower-note">// what makes it run</p>
           <ul>
-            <li><span class="idx">01</span> Docker <span class="meta">multi-stage</span></li>
-            <li><span class="idx">02</span> Terraform <span class="meta">IaC</span></li>
-            <li><span class="idx">03</span> Ansible <span class="meta">config mgmt</span></li>
+            <li><span class="idx">01</span> Go <span class="meta">services</span></li>
+            <li><span class="idx">02</span> Docker <span class="meta">multi-stage</span></li>
+            <li><span class="idx">03</span> Terraform · Ansible <span class="meta">IaC</span></li>
             <li><span class="idx">04</span> CI/CD <span class="meta">GitLab · Actions</span></li>
-            <li><span class="idx">05</span> nginx / TLS <span class="meta">reverse proxy</span></li>
-            <li><span class="idx">06</span> Prometheus · Grafana <span class="meta">observability</span></li>
+            <li><span class="idx">05</span> Linux · nginx · Prometheus <span class="meta">ops</span></li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== PROJECTS ==================== -->
-  <section id="projects">
+  <!-- ===== ABOUT ===== -->
+  <section id="about">
     <div class="wrap reveal">
-      <p class="eyebrow">shipped</p>
-      <h2 class="section-title">Selected work</h2>
-
-      <article class="project">
-        <div class="project-head">
-          <h3>Atlas</h3>
-          <span class="kind">game editor · self-hosted ops</span>
-        </div>
-        <p>
-          A browser-based 3D game editor — build, program, and export games in
-          the browser, rendered with Babylon.js and served by a Go app. Runs on
-          a VPS I provision and operate end to end: containerized deploys through
-          a CI/CD pipeline, the whole server codified in Ansible, TLS-terminated
-          nginx, and a Prometheus/Grafana monitoring stack.
-          <br /><span class="live">live · atlas-arcade-tech.com</span>
-        </p>
-        <div class="stack">
-          <span class="chip hot">Babylon.js</span>
-          <span class="chip hot">WebGL</span>
-          <span class="chip">Go</span>
-          <span class="chip">Docker</span>
-          <span class="chip">GitLab CI</span>
-          <span class="chip">Ansible</span>
-          <span class="chip">Terraform</span>
-          <span class="chip">nginx</span>
-          <span class="chip">Prometheus</span>
-        </div>
-      </article>
-
-      <article class="project">
-        <div class="project-head">
-          <h3>This site</h3>
-          <span class="kind">serverless · full ci/cd</span>
-        </div>
-        <p>
-          A static résumé on S3 behind CloudFront, with a serverless visitor
-          counter — Lambda + DynamoDB behind a function URL. Every resource is
-          defined in Terraform, and both front and back end deploy automatically
-          through GitHub Actions with keyless OIDC auth.
-          <br /><span class="live">the visitor count at the bottom of this page runs on it →</span>
-        </p>
-        <div class="stack">
-          <span class="chip hot">AWS Lambda</span>
-          <span class="chip hot">DynamoDB</span>
-          <span class="chip">S3 · CloudFront</span>
-          <span class="chip">Terraform</span>
-          <span class="chip">GitHub Actions</span>
-          <span class="chip">OIDC</span>
-          <span class="chip">Python</span>
-        </div>
-      </article>
+      <p class="eyebrow">readme</p>
+      <h2 class="section-title">About</h2>
+      <p class="lede">
+        [Placeholder — a few honest sentences about you. Suggested spine: you're a
+        developer drawn to software people can play with — interactive, gamified,
+        real-time — and you follow it all the way down, owning the backend,
+        infrastructure, and Linux that keep it running. Replace this text.]
+      </p>
+      <p class="lede muted">[Second line — what you're looking for. Replace this.]</p>
     </div>
   </section>
 
-  <!-- ==================== EXPERIENCE ==================== -->
+  <!-- ===== EXPERIENCE ===== -->
   <section id="experience">
     <div class="wrap reveal">
       <p class="eyebrow">changelog</p>
@@ -401,7 +499,7 @@
         <div class="entry">
           <p class="ver"><b>[20XX]</b> — present</p>
           <h3>[Role / Title — placeholder]</h3>
-          <p>[One line on what you did and shipped here. Replace with the real thing.]</p>
+          <p>[One line on what you did and shipped. Replace.]</p>
         </div>
         <div class="entry">
           <p class="ver"><b>[20XX]</b> — [20XX]</p>
@@ -417,260 +515,304 @@
     </div>
   </section>
 
-  <!-- ==================== CONTACT ==================== -->
+  <!-- ===== CONTACT ===== -->
   <footer id="contact">
     <div class="wrap reveal">
       <p class="eyebrow">connect</p>
       <h2 class="section-title">Get in touch</h2>
-
       <div class="contact-grid">
-        <div class="contact-intro">
-          <p class="lede">[Placeholder — one line inviting contact. e.g. "Open to DevOps and platform roles. Tell me what you're building."]</p>
+        <div>
+          <p class="lede">[Placeholder — one line inviting contact. e.g. "Open to roles building interactive products — front to back. Tell me what you're making."]</p>
           <p class="lede muted">I usually reply within a day.</p>
         </div>
-
         <div class="form-panel" id="form-panel">
           <p class="panel-head"><span class="dot"></span> message · new</p>
-
           <form class="contact-form" id="contact-form" novalidate>
-            <div class="field">
-              <label for="cf-name">Name</label>
-              <input type="text" id="cf-name" name="name" placeholder="Jane Doe" required />
-            </div>
-            <div class="field">
-              <label for="cf-email">Email</label>
-              <input type="email" id="cf-email" name="email" placeholder="jane@company.com" required />
-            </div>
-            <div class="field">
-              <label for="cf-message">Message</label>
-              <textarea id="cf-message" name="message" placeholder="What's on your mind?" required></textarea>
-            </div>
-            <div class="form-actions">
-              <button type="submit" class="send-btn">Send message</button>
-              <span class="form-note" id="form-note"></span>
-            </div>
+            <div class="field"><label for="cf-name">Name</label><input type="text" id="cf-name" name="name" placeholder="Jane Doe" required /></div>
+            <div class="field"><label for="cf-email">Email</label><input type="email" id="cf-email" name="email" placeholder="jane@company.com" required /></div>
+            <div class="field"><label for="cf-message">Message</label><textarea id="cf-message" name="message" placeholder="What are you building?" required></textarea></div>
+            <div class="form-actions"><button type="submit" class="send-btn">Send message</button><span class="form-note" id="form-note"></span></div>
           </form>
-
           <div class="form-done">
             <p class="big">Message ready.</p>
-            <p>Your mail client should have opened with it drafted. If it didn't, reach me at <a id="fallback-mail" href="#">the email below</a>.</p>
+            <p>Your mail client should have opened with it drafted. If not, reach me at <a id="fallback-mail" href="#">the email below</a>.</p>
           </div>
         </div>
       </div>
 
-      <!-- Visitor counter (Cloud Resume Challenge). Update COUNTER_API if the URL changes. -->
       <p class="counter-strip">
-        <span class="dot"></span>
-        <span>visitor</span>
-        <span id="visitor-count">—</span>
-        <span class="note">· counted by lambda + dynamodb, live</span>
+        <span class="dot"></span><span>visitor</span><span id="visitor-count">—</span>
+        <span class="note">· this site is mine too — serverless on AWS (Lambda + DynamoDB), Terraform-managed, deployed via CI/CD</span>
       </p>
-
-      <p class="colophon">Static site · S3 + CloudFront · Terraform-managed · deployed via GitHub Actions.</p>
+      <p class="colophon">S3 + CloudFront · Infrastructure as code · GitHub Actions.</p>
     </div>
   </footer>
 
-  <!-- ==================== THREE.JS HERO ==================== -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- ===== SCRIPTS ===== -->
   <script>
-    /* Hero: a torus knot as a glowing point cloud that assembles from
-       scattered space on load, then orbits toward the cursor. Real WebGL.
-       FPS + point count in the status bar come off the render loop.
-       Degrades gracefully if three/WebGL is unavailable. */
+    /* ============================================================
+       PLAYABLE HERO GAME — "flight"
+       One input (↑ / click / tap / space-when-focused). Vanilla canvas,
+       delta-timed. No dependencies. Fly through the gaps; each gap = +1.
+       ============================================================ */
     (function () {
-      var canvas = document.getElementById("scene");
+      var canvas = document.getElementById("game");
+      if (!canvas) return;
+      var ctx = canvas.getContext("2d");
       var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      var fpsEl = document.getElementById("fps");
-      var ptsEl = document.getElementById("points");
-      var rndEl = document.getElementById("renderer");
 
-      if (typeof THREE === "undefined" || !canvas) {
-        if (rndEl) rndEl.textContent = "static";
-        if (fpsEl) fpsEl.textContent = "—";
-        return;
-      }
+      var scoreEl = document.getElementById("g-score");
+      var bestEl  = document.getElementById("g-best");
+      var fpsEl   = document.getElementById("g-fps");
 
-      var renderer;
-      try {
-        renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
-      } catch (e) {
-        if (rndEl) rndEl.textContent = "static";
-        if (fpsEl) fpsEl.textContent = "—";
-        return;
-      }
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-
-      var scene = new THREE.Scene();
-      scene.fog = new THREE.FogExp2(0x0e141a, 0.055);
-
-      var camera = new THREE.PerspectiveCamera(52, 1, 0.1, 100);
-      camera.position.set(0, 0, 8.5);
-
-      var isSmall = window.innerWidth < 720;
-      var geo = new THREE.TorusKnotGeometry(2.5, 0.72, isSmall ? 140 : 220, isSmall ? 20 : 30);
-      var srcAttr = geo.attributes.position;
-      var count = srcAttr.count;
-      if (ptsEl) ptsEl.textContent = count.toLocaleString();
-
-      var target = new Float32Array(srcAttr.array);
-      var start = new Float32Array(count * 3);
-      var pos = new Float32Array(count * 3);
-      var col = new Float32Array(count * 3);
-      var chalk = [0.87, 0.89, 0.88], hot = [1.0, 0.54, 0.23];
-
-      for (var i = 0; i < count; i++) {
-        var u = Math.random(), v = Math.random();
-        var th = 2 * Math.PI * u, ph = Math.acos(2 * v - 1), rr = 11 + Math.random() * 5;
-        start[i*3]   = rr * Math.sin(ph) * Math.cos(th);
-        start[i*3+1] = rr * Math.sin(ph) * Math.sin(th);
-        start[i*3+2] = rr * Math.cos(ph);
-        var isHot = ((i * 73856093) % 100 + 100) % 100 < 16;
-        var c = isHot ? hot : chalk;
-        col[i*3] = c[0]; col[i*3+1] = c[1]; col[i*3+2] = c[2];
-        if (reduce) { pos[i*3]=target[i*3]; pos[i*3+1]=target[i*3+1]; pos[i*3+2]=target[i*3+2]; }
-        else { pos[i*3]=start[i*3]; pos[i*3+1]=start[i*3+1]; pos[i*3+2]=start[i*3+2]; }
-      }
-
-      var pgeo = new THREE.BufferGeometry();
-      pgeo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
-      pgeo.setAttribute("color", new THREE.BufferAttribute(col, 3));
-
-      var sprite = (function () {
-        var c = document.createElement("canvas"); c.width = c.height = 64;
-        var g = c.getContext("2d");
-        var grd = g.createRadialGradient(32, 32, 0, 32, 32, 32);
-        grd.addColorStop(0, "rgba(255,255,255,1)");
-        grd.addColorStop(0.35, "rgba(255,255,255,0.55)");
-        grd.addColorStop(1, "rgba(255,255,255,0)");
-        g.fillStyle = grd; g.fillRect(0, 0, 64, 64);
-        return new THREE.CanvasTexture(c);
-      })();
-
-      var mat = new THREE.PointsMaterial({
-        size: isSmall ? 0.13 : 0.1, map: sprite, vertexColors: true,
-        transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
-        sizeAttenuation: true
-      });
-
-      var points = new THREE.Points(pgeo, mat);
-      scene.add(points);
-
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var W = 0, H = 0;
       function resize() {
         var r = canvas.getBoundingClientRect();
-        renderer.setSize(r.width, r.height, false);
-        camera.aspect = (r.width || 1) / (r.height || 1);
-        camera.updateProjectionMatrix();
+        W = r.width; H = r.height;
+        canvas.width = Math.round(W * dpr);
+        canvas.height = Math.round(H * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       }
       resize();
       window.addEventListener("resize", resize);
 
-      var tx = 0, ty = 0, mx = 0, my = 0;
-      window.addEventListener("pointermove", function (e) {
-        tx = (e.clientX / window.innerWidth - 0.5) * 0.8;
-        ty = (e.clientY / window.innerHeight - 0.5) * 0.5;
-      });
+      var STATE = "ready"; // ready | playing | over
+      var best = 0, score = 0;
 
-      var t0 = performance.now(), ASSEMBLE = 1700;
-      function easeOut(x) { return 1 - Math.pow(1 - x, 3); }
+      var player, gates, particles, speed, spawnT, shake;
+
+      function reset() {
+        player = { x: 0, y: 0, vy: 0, r: 0 };
+        gates = [];
+        particles = [];
+        speed = 0;
+        spawnT = 0;
+        shake = 0;
+        score = 0;
+        if (scoreEl) scoreEl.textContent = "0";
+      }
+      reset();
+
+      function start() {
+        reset();
+        player.x = W * 0.28;
+        player.y = H * 0.42;
+        player.r = Math.max(6, Math.min(W, H) * 0.02);
+        speed = Math.max(120, W * 0.28);
+        STATE = "playing";
+        flap();
+      }
+
+      function flap() {
+        if (STATE === "ready") { start(); return; }
+        if (STATE === "over") { start(); return; }
+        player.vy = -Math.max(320, H * 0.86);
+      }
+
+      function spawnGate() {
+        var gap = Math.max(H * 0.30, player.r * 8) - Math.min(score * 1.5, H * 0.08);
+        var margin = H * 0.12;
+        var gy = margin + Math.random() * (H - gap - margin * 2);
+        gates.push({ x: W + 40, w: Math.max(34, W * 0.055), gapY: gy, gapH: gap, passed: false });
+      }
+
+      function burst(x, y, color, n) {
+        for (var i = 0; i < n; i++) {
+          var a = Math.random() * Math.PI * 2, sp = 40 + Math.random() * 160;
+          particles.push({ x: x, y: y, vx: Math.cos(a)*sp, vy: Math.sin(a)*sp, life: 0.6 + Math.random()*0.4, t: 0, color: color });
+        }
+      }
+
+      var GRAV = 1380;
+
+      function update(dt) {
+        // gentle difficulty ramp
+        speed += dt * 3;
+
+        player.vy += GRAV * dt;
+        player.y += player.vy * dt;
+
+        // trail
+        if (Math.random() < 0.6) particles.push({ x: player.x - player.r, y: player.y, vx: -speed*0.3, vy: (Math.random()-0.5)*30, life: 0.5, t: 0, color: "18,160,160", trail: true });
+
+        // spawn gates
+        spawnT -= dt;
+        if (spawnT <= 0) { spawnGate(); spawnT = Math.max(1.05, 1.7 - score * 0.03); }
+
+        for (var i = gates.length - 1; i >= 0; i--) {
+          var g = gates[i];
+          g.x -= speed * dt;
+          if (!g.passed && g.x + g.w < player.x) { g.passed = true; score++; if (scoreEl) scoreEl.textContent = score; }
+          if (g.x + g.w < -10) gates.splice(i, 1);
+
+          // collision
+          var withinX = player.x + player.r > g.x && player.x - player.r < g.x + g.w;
+          if (withinX) {
+            if (player.y - player.r < g.gapY || player.y + player.r > g.gapY + g.gapH) die();
+          }
+        }
+
+        // bounds
+        if (player.y + player.r > H || player.y - player.r < 0) die();
+
+        // particles
+        for (var j = particles.length - 1; j >= 0; j--) {
+          var p = particles[j];
+          p.t += dt;
+          p.x += p.vx * dt; p.y += p.vy * dt;
+          if (!p.trail) p.vy += 400 * dt;
+          if (p.t >= p.life) particles.splice(j, 1);
+        }
+
+        if (shake > 0) shake = Math.max(0, shake - dt * 4);
+      }
+
+      function die() {
+        if (STATE !== "playing") return;
+        burst(player.x, player.y, "18,160,160", 26);
+        shake = 1;
+        best = Math.max(best, score);
+        if (bestEl) bestEl.textContent = best;
+        STATE = "over";
+      }
+
+      function drawGrid() {
+        ctx.strokeStyle = "rgba(44,50,55,0.6)";
+        ctx.lineWidth = 1;
+        var step = 34;
+        for (var x = (Date.now()*0.02 % step); x < W; x += step) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+        for (var y = 0; y < H; y += step) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+      }
+
+      function render() {
+        ctx.clearRect(0, 0, W, H);
+        ctx.save();
+        if (shake > 0) ctx.translate((Math.random()-0.5)*8*shake, (Math.random()-0.5)*8*shake);
+
+        drawGrid();
+
+        // gates
+        for (var i = 0; i < gates.length; i++) {
+          var g = gates[i];
+          ctx.fillStyle = "#22272b";
+          ctx.strokeStyle = "rgba(18,160,160,0.55)";
+          ctx.lineWidth = 1.5;
+          // top
+          ctx.fillRect(g.x, 0, g.w, g.gapY);
+          ctx.strokeRect(g.x + 0.5, -1, g.w - 1, g.gapY + 1);
+          // bottom
+          ctx.fillRect(g.x, g.gapY + g.gapH, g.w, H - (g.gapY + g.gapH));
+          ctx.strokeRect(g.x + 0.5, g.gapY + g.gapH, g.w - 1, H - (g.gapY + g.gapH) + 1);
+        }
+
+        // particles
+        for (var j = 0; j < particles.length; j++) {
+          var p = particles[j], a = 1 - p.t / p.life;
+          ctx.fillStyle = "rgba(" + p.color + "," + (a * 0.8) + ")";
+          var s = p.trail ? 2.2 * a : 3 * a;
+          ctx.beginPath(); ctx.arc(p.x, p.y, Math.max(0.5, s), 0, Math.PI*2); ctx.fill();
+        }
+
+        // player
+        if (STATE === "playing" || STATE === "over") {
+          var grd = ctx.createRadialGradient(player.x, player.y, 0, player.x, player.y, player.r * 3);
+          grd.addColorStop(0, "rgba(18,160,160,0.9)");
+          grd.addColorStop(1, "rgba(18,160,160,0)");
+          ctx.fillStyle = grd;
+          ctx.beginPath(); ctx.arc(player.x, player.y, player.r * 3, 0, Math.PI*2); ctx.fill();
+          ctx.fillStyle = "#57d6d6";
+          ctx.beginPath(); ctx.arc(player.x, player.y, player.r, 0, Math.PI*2); ctx.fill();
+        }
+
+        ctx.restore();
+
+        // overlays
+        ctx.textAlign = "center";
+        if (STATE === "ready") {
+          ctx.fillStyle = "rgba(230,234,232,0.95)";
+          ctx.font = "700 " + Math.max(16, W*0.04) + "px Archivo, sans-serif";
+          ctx.fillText("Play me", W/2, H/2 - 6);
+          ctx.fillStyle = "rgba(138,150,156,0.95)";
+          ctx.font = "500 " + Math.max(11, W*0.022) + "px 'JetBrains Mono', monospace";
+          ctx.fillText("↑  ·  click  ·  tap", W/2, H/2 + Math.max(16, W*0.035));
+        } else if (STATE === "over") {
+          ctx.fillStyle = "rgba(21,24,27,0.72)";
+          ctx.fillRect(0, 0, W, H);
+          ctx.fillStyle = "#12a0a0";
+          ctx.font = "800 " + Math.max(20, W*0.05) + "px Archivo, sans-serif";
+          ctx.fillText("Game over", W/2, H/2 - 12);
+          ctx.fillStyle = "rgba(230,234,232,0.95)";
+          ctx.font = "600 " + Math.max(13, W*0.03) + "px 'JetBrains Mono', monospace";
+          ctx.fillText("score " + score + "   ·   best " + best, W/2, H/2 + Math.max(14, W*0.028));
+          ctx.fillStyle = "rgba(138,150,156,0.95)";
+          ctx.font = "500 " + Math.max(11, W*0.022) + "px 'JetBrains Mono', monospace";
+          ctx.fillText("press to retry", W/2, H/2 + Math.max(38, W*0.075));
+        }
+      }
 
       var last = performance.now(), acc = 0, n = 0;
       function loop(now) {
-        var dt = now - last; last = now;
-
-        var p = Math.min((now - t0) / ASSEMBLE, 1), e = easeOut(p);
-        if (p < 1) {
-          var arr = pgeo.attributes.position.array;
-          for (var i = 0; i < count; i++) {
-            arr[i*3]   = start[i*3]   + (target[i*3]   - start[i*3])   * e;
-            arr[i*3+1] = start[i*3+1] + (target[i*3+1] - start[i*3+1]) * e;
-            arr[i*3+2] = start[i*3+2] + (target[i*3+2] - start[i*3+2]) * e;
-          }
-          pgeo.attributes.position.needsUpdate = true;
-        }
-
-        mx += (tx - mx) * 0.05; my += (ty - my) * 0.05;
-        points.rotation.y += 0.0016;
-        points.rotation.x = -0.25 + my;
-        points.rotation.z = mx * 0.15;
-        camera.position.x += ((mx * 2.2) - camera.position.x) * 0.05;
-        camera.lookAt(0, 0, 0);
-
-        renderer.render(scene, camera);
-
-        if (dt > 0) { acc += 1000 / dt; n++; }
-        if (n >= 30 && fpsEl) { fpsEl.textContent = Math.round(acc / n); acc = 0; n = 0; }
-
+        var dt = Math.min((now - last) / 1000, 0.05); last = now;
+        if (STATE === "playing") update(dt);
+        else if (particles.length) { for (var j = particles.length-1; j>=0; j--){ var p=particles[j]; p.t+=dt; p.x+=p.vx*dt; p.y+=p.vy*dt; if(!p.trail)p.vy+=400*dt; if(p.t>=p.life)particles.splice(j,1);} }
+        render();
+        if (dt > 0) { acc += 1/dt; n++; }
+        if (n >= 30 && fpsEl) { fpsEl.textContent = Math.round(acc/n); acc = 0; n = 0; }
         requestAnimationFrame(loop);
       }
+      requestAnimationFrame(loop);
 
-      if (reduce) {
-        resize();
-        renderer.render(scene, camera);
-        if (fpsEl) fpsEl.textContent = "—";
-      } else {
-        requestAnimationFrame(loop);
-      }
+      // input — scoped so it never hijacks the page
+      function act(e) { e.preventDefault(); canvas.focus(); flap(); }
+      canvas.addEventListener("pointerdown", act);
+      canvas.addEventListener("keydown", function (e) {
+        if (e.code === "Space" || e.code === "ArrowUp") { e.preventDefault(); flap(); }
+      });
     })();
 
-    /* Contact form.
-       Default: opens the visitor's mail client with the message pre-filled
-       (no backend needed). To collect submissions server-side instead, set
-       FORM_ENDPOINT to a Formspree URL or your own Lambda function URL. */
+    /* ===== CONTACT FORM ===== */
     (function () {
-      var EMAIL = "you@example.com";     // <- your address
-      var FORM_ENDPOINT = "";            // <- optional: Formspree / Lambda URL
-
+      var EMAIL = "you@example.com";   // <- your address
+      var FORM_ENDPOINT = "";          // <- optional: Formspree / Lambda URL
       var form = document.getElementById("contact-form");
       var panel = document.getElementById("form-panel");
       var note = document.getElementById("form-note");
-      var fallback = document.getElementById("fallback-mail");
-      if (fallback) fallback.href = "mailto:" + EMAIL;
+      var fb = document.getElementById("fallback-mail");
+      if (fb) fb.href = "mailto:" + EMAIL;
       if (!form) return;
-
       form.addEventListener("submit", function (e) {
         e.preventDefault();
-        var name = form.name.value.trim();
-        var email = form.email.value.trim();
-        var msg = form.message.value.trim();
-
+        var name = form.name.value.trim(), email = form.email.value.trim(), msg = form.message.value.trim();
         note.className = "form-note";
         if (!name || !email || !msg) { note.textContent = "Fill in all three fields."; note.classList.add("err"); return; }
         if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { note.textContent = "That email doesn't look right."; note.classList.add("err"); return; }
-
         if (FORM_ENDPOINT) {
           note.textContent = "Sending…";
-          fetch(FORM_ENDPOINT, {
-            method: "POST",
-            headers: { "Content-Type": "application/json", "Accept": "application/json" },
-            body: JSON.stringify({ name: name, email: email, message: msg })
-          }).then(function (r) {
-            if (!r.ok) throw new Error(r.status);
-            panel.classList.add("sent");
-          }).catch(function () {
-            note.textContent = "Couldn't send — email me directly at " + EMAIL;
-            note.classList.add("err");
-          });
+          fetch(FORM_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify({ name: name, email: email, message: msg }) })
+            .then(function (r) { if (!r.ok) throw new Error(r.status); panel.classList.add("sent"); })
+            .catch(function () { note.textContent = "Couldn't send — email me at " + EMAIL; note.classList.add("err"); });
         } else {
-          var subject = encodeURIComponent("Portfolio contact — " + name);
-          var body = encodeURIComponent(msg + "\n\n— " + name + " (" + email + ")");
-          window.location.href = "mailto:" + EMAIL + "?subject=" + subject + "&body=" + body;
+          var s = encodeURIComponent("Portfolio contact — " + name);
+          var b = encodeURIComponent(msg + "\n\n— " + name + " (" + email + ")");
+          window.location.href = "mailto:" + EMAIL + "?subject=" + s + "&body=" + b;
           panel.classList.add("sent");
         }
       });
     })();
 
-    /* Scroll reveals */
+    /* ===== SCROLL REVEALS ===== */
     (function () {
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
-      }, { threshold: 0.12 });
+      }, { threshold: 0.1 });
       document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
     })();
 
-    /* Visitor counter (Cloud Resume Challenge) */
+    /* ===== VISITOR COUNTER (Cloud Resume Challenge) ===== */
     (function () {
-      var COUNTER_API = "https://cztjgciu2465brvyb3srv22cka0rqyca.lambda-url.us-east-1.on.aws/"
+      var COUNTER_API = "https://cztjgciu2465brvyb3srv22cka0rqyca.lambda-url.us-east-1.on.aws/";
       var el = document.getElementById("visitor-count");
       if (!el) return;
       fetch(COUNTER_API)
