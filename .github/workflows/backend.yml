@@ -17,6 +17,8 @@ permissions:
 env:
   AWS_REGION: us-east-1
   AWS_ROLE_ARN: arn:aws:iam::593901683489:role/github-actions-cloud-resume
+  TF_VAR_function_name: lambda_function
+  TF_VAR_role_name: lambda_function-role-lqoruqcw
 
 jobs:
   test:
@@ -57,4 +59,4 @@ jobs:
 
       - name: Terraform apply
         working-directory: terraform
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve -input=false
