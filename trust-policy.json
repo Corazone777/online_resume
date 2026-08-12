@@ -12,7 +12,7 @@
           "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
         },
         "StringLike": {
-          "token.actions.githubusercontent.com:sub": "repo:Corazone777*/online_resume*:*"
+          "token.actions.githubusercontent.com:sub": "repo:Corazone777*/online_resume*"
         }
       }
     }
