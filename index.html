@@ -568,7 +568,6 @@
       cX.addEventListener("input",function(){box.gx=+cX.value;syncLabels();});
       cY.addEventListener("input",function(){box.gy=+cY.value;syncLabels();});
       cZ.addEventListener("input",function(){box.z=+cZ.value;syncLabels();});
-      cS.addEventListener("input",function(){box.size=+cS.value;cX.max=cY.max=(N-box.size).toFixed(2);syncLabels();});
       cC.addEventListener("input",function(){box.color=cC.value;syncLabels();});
       document.querySelectorAll("#swatches button").forEach(function(b){b.addEventListener("click",function(){box.color=b.dataset.c;syncInputs();syncLabels();});});
       document.getElementById("iso-reset").addEventListener("click",function(){box=Object.assign({},DEF);syncInputs();syncLabels();});
