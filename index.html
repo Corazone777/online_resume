@@ -180,7 +180,7 @@
     /* modal */
     .modal-bg{position:fixed;inset:0;z-index:100;background:rgba(15,12,10,0.7);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:1.5rem;}
     .modal-bg.open{display:flex;}
-    .modal{background:var(--panel);border:1px solid var(--line);border-radius:14px;max-width:440px;width:100%;padding:1.6rem;position:relative;box-shadow:0 40px 90px -40px rgba(0,0,0,0.9);animation:modalIn 0.25s var(--ease);}
+    .modal{background:var(--panel);border:1px solid var(--line);border-radius:14px;max-width:520px;width:100%;max-height:88vh;overflow:auto;padding:1.6rem;position:relative;box-shadow:0 40px 90px -40px rgba(0,0,0,0.9);animation:modalIn 0.25s var(--ease);}
     @keyframes modalIn{from{opacity:0;transform:translateY(12px) scale(0.98);}to{opacity:1;transform:none;}}
     .modal .close{position:absolute;top:0.9rem;right:0.9rem;background:none;border:none;color:var(--muted);cursor:pointer;} .modal .close:hover{color:var(--amber);}
     .modal .mhead{display:flex;align-items:center;gap:0.8rem;margin-bottom:1rem;}
@@ -189,6 +189,29 @@
     .modal .mhead .mt{font-family:var(--font-mono);font-size:0.66rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--amber);}
     .modal .mlabel{font-family:var(--font-mono);font-size:0.64rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);margin:1rem 0 0.3rem;}
     .modal p{margin:0;color:var(--muted);font-size:0.94rem;line-height:1.55;}
+    /* live demos */
+    .tchip .mono{font-family:var(--font-display);font-weight:800;font-size:0.74rem;letter-spacing:-0.02em;} .modal .mhead .tchip .mono{font-size:1rem;}
+    .m-demo{margin-top:0.4rem;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--viewport);}
+    .dm-run{font-family:var(--font-mono);font-size:0.72rem;font-weight:700;color:var(--viewport);background:var(--amber);border:none;border-radius:7px;padding:0.42rem 0.9rem;cursor:pointer;margin:0.6rem;}
+    .dm-run:hover{background:var(--amber-br);}
+    .dm-out{font-family:var(--font-mono);font-size:0.72rem;line-height:1.55;padding:0.7rem 0.8rem;min-height:92px;max-height:150px;overflow:auto;color:var(--muted);}
+    .dm-out .ok,.dm-out .add{color:var(--live);} .dm-out .del{color:#e08a8a;} .dm-out .hl{color:var(--teal-br);} .dm-out .w{color:var(--amber);} .dm-out .cmd{color:var(--chalk);}
+    .dm-code{font-family:var(--font-mono);font-size:0.7rem;color:var(--muted);background:var(--panel-2);padding:0.6rem 0.8rem;border-bottom:1px solid var(--line-soft);white-space:pre-wrap;}
+    .dm-code .k{color:#c58fd6;} .dm-code .s{color:#9ed69b;} .dm-code .t{color:var(--teal-br);} .dm-code .c{color:var(--dim);}
+    .dm-code input{background:var(--viewport);border:1px solid var(--line);color:var(--amber);font-family:inherit;font-size:inherit;border-radius:4px;padding:0 4px;}
+    .dm-split{display:grid;grid-template-columns:1fr 1fr;min-height:160px;}
+    .dm-ta{border:none;background:var(--panel-2);color:var(--chalk);font-family:var(--font-mono);font-size:0.72rem;padding:0.7rem;resize:none;outline:none;border-right:1px solid var(--line-soft);}
+    .dm-frame{border:none;width:100%;height:100%;background:#1c1a17;min-height:160px;}
+    .dm-hint{font-family:var(--font-mono);font-size:0.66rem;color:var(--dim);padding:0.5rem 0.8rem;border-top:1px solid var(--line-soft);}
+    .dm-css-stage{display:flex;align-items:center;justify-content:center;min-height:128px;background:radial-gradient(circle at 50% 40%,rgba(27,176,171,0.08),transparent 60%);}
+    .dm-box{width:70px;height:70px;display:grid;place-items:center;font-family:var(--font-mono);font-size:0.72rem;color:#111;background:var(--amber);}
+    .dm-ctl{display:flex;flex-direction:column;gap:0.5rem;padding:0.7rem 0.8rem;} .dm-ctl label{font-family:var(--font-mono);font-size:0.66rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--muted);display:flex;justify-content:space-between;} .dm-ctl label b{color:var(--teal-br);font-weight:500;} .dm-ctl input[type=range]{width:100%;}
+    .dm-row{display:flex;gap:0.4rem;flex-wrap:wrap;padding:0.2rem 0.8rem;}
+    .dm-btn{font-family:var(--font-mono);font-size:0.72rem;color:var(--chalk);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:0.35rem 0.6rem;cursor:pointer;} .dm-btn:hover{border-color:var(--teal);color:var(--teal-br);}
+    .dm-val{font-family:var(--font-display);font-weight:800;font-size:1.6rem;color:var(--amber);text-align:center;padding:0.5rem;}
+    .dm-canvas{display:block;width:100%;height:150px;background:var(--viewport);}
+    .dm-ti{width:100%;background:var(--panel-2);border:none;border-top:1px solid var(--line-soft);color:var(--chalk);font-family:var(--font-mono);font-size:0.72rem;padding:0.55rem 0.8rem;outline:none;}
+    .dm-msg{font-family:var(--font-mono);font-size:0.72rem;padding:0.5rem 0.8rem;} .dm-msg.good{color:var(--live);} .dm-msg.bad{color:#e08a8a;}
 
     /* CONTACT */
     footer{padding:clamp(4rem,10vh,7rem) 0 3.5rem;}
@@ -452,6 +475,7 @@
       <div class="mhead"><span id="m-icon"></span><div><h4 id="m-name"></h4><span class="mt" id="m-tag"></span></div></div>
       <p class="mlabel">What it is</p><p id="m-what"></p>
       <p class="mlabel">How I use it</p><p id="m-how"></p>
+      <p class="mlabel">Live demo — try it</p><div id="m-demo" class="m-demo"></div>
     </div>
   </div>
 
@@ -587,14 +611,15 @@
 
     /* ===== CAPABILITIES + MODAL ===== */
     (function(){
-      var BABYLON_MARK='<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#cf4a3c" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg>';
+      var BJS='<span class="mono" style="color:#d1524a">Bjs</span>';
+      var GLM='<span class="mono" style="color:#b23a2e">GL</span>';
       var TECH={
         js:{name:"JavaScript",slug:"javascript",fb:"JS",tag:"language",dark:true,what:"The language of the browser — and of most of what I build on the front end.",how:"Everything interactive on this page (the game, the isometric editor, the terminal) is hand-written vanilla JS, no frameworks."},
         ts:{name:"TypeScript",slug:"typescript",fb:"TS",tag:"language",what:"JavaScript with types — safer, more maintainable at scale.",how:"I script Atlas scenes in TypeScript against the Babylon.js API, with types catching mistakes before they hit the viewport."},
-        babylon:{name:"Babylon.js",custom:BABYLON_MARK,fb:"BJS",tag:"3D engine",what:"A powerful WebGL engine for real-time 3D in the browser.",how:"It's the render core of Atlas — scenes, meshes, gizmos, lighting, and export all run on Babylon."},
+        babylon:{name:"Babylon.js",custom:BJS,fb:"BJS",tag:"3D engine",what:"A powerful WebGL engine for real-time 3D in the browser.",how:"It's the render core of Atlas — scenes, meshes, gizmos, lighting, and export all run on Babylon."},
         html:{name:"HTML5",slug:"html5",fb:"H5",tag:"markup",what:"The structure of the web, including the canvas element.",how:"Semantic, accessible markup — plus the canvas every interactive demo here draws to."},
         css:{name:"CSS",slug:"css",fb:"CSS",tag:"styling",what:"Layout, motion, and the whole visual feel of a page.",how:"This site's design system, layout, and animation are all hand-written CSS — no UI kit."},
-        webgl:{name:"WebGL",custom:'<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#990000" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M8 10l-2 2 2 2M16 10l2 2-2 2"/></svg>',fb:"GL",tag:"graphics",what:"The browser's low-level GPU graphics API.",how:"Under Babylon, and directly when I need custom rendering — I'm comfortable at the projection-and-shader level."},
+        webgl:{name:"WebGL",custom:GLM,fb:"GL",tag:"graphics",what:"The browser's low-level GPU graphics API.",how:"Under Babylon, and directly when I need custom rendering — I'm comfortable at the projection-and-shader level."},
         go:{name:"Go",slug:"go",fb:"GO",tag:"backend",what:"A fast, simple compiled language for services.",how:"The Atlas backend is a Go server, containerized and serving the app; I reach for Go for anything backend."},
         docker:{name:"Docker",slug:"docker",fb:"DK",tag:"containers",what:"Package an app and its dependencies into a portable image.",how:"Multi-stage Dockerfiles build small production images that deploy identically everywhere."},
         terraform:{name:"Terraform",slug:"terraform",fb:"TF",tag:"IaC",what:"Declare cloud infrastructure as code.",how:"I define the whole backend — servers, DNS, serverless — in Terraform, and prove it by destroying and rebuilding it."},
@@ -605,16 +630,130 @@
         aws:{name:"AWS",slug:"amazonwebservices",fb:"AWS",tag:"cloud",what:"Amazon's cloud platform.",how:"This site runs serverless on AWS — S3 + CloudFront front end, Lambda + DynamoDB counter, all in Terraform."}
       };
       var FE=["js","ts","babylon","webgl","html","css"], BE=["go","docker","terraform","ansible","linux","nginx","prometheus","aws"];
-      function chip(t,big){var c=t.dark?"tchip dark":"tchip";if(t.custom)return '<span class="'+c+'">'+t.custom+'</span>';return '<span class="'+c+'"><img src="https://cdn.simpleicons.org/'+t.slug+'" alt="'+t.name+'" data-fb="'+t.fb+'" onerror="techFallback(this)"></span>';}
+      function chip(t){var c=t.dark?"tchip dark":"tchip";if(t.custom)return '<span class="'+c+'">'+t.custom+'</span>';return '<span class="'+c+'"><img src="https://cdn.simpleicons.org/'+t.slug+'" alt="'+t.name+'" data-fb="'+t.fb+'" onerror="techFallback(this)"></span>';}
       function card(k){var t=TECH[k];return '<button class="cap" data-k="'+k+'">'+chip(t)+'<span class="cn">'+t.name+'</span><span class="ct">'+t.tag+'</span></button>';}
       document.getElementById("cap-fe").innerHTML=FE.map(card).join("");
       document.getElementById("cap-be").innerHTML=BE.map(card).join("");
-      var bg=document.getElementById("modal-bg");
-      function open(k){var t=TECH[k];document.getElementById("m-name").textContent=t.name;document.getElementById("m-tag").textContent=t.tag;document.getElementById("m-what").textContent=t.what;document.getElementById("m-how").textContent=t.how;document.getElementById("m-icon").outerHTML='<span id="m-icon">'+chip(t)+'</span>';bg.classList.add("open");}
+
+      /* ---- per-tech live demos ---- */
+      function runner(host,code,steps){
+        host.innerHTML=(code?'<div class="dm-code">'+code+'</div>':'')+'<div class="dm-out"></div><button class="dm-run">▶ Run</button>';
+        var out=host.querySelector(".dm-out"),btn=host.querySelector(".dm-run"),tm=[];
+        function clr(){tm.forEach(clearTimeout);tm=[];}
+        function run(){clr();out.innerHTML="";var t=0;steps.forEach(function(s){t+=(s.d||280);tm.push(setTimeout(function(){var d=document.createElement("div");d.innerHTML=s.t;out.appendChild(d);out.scrollTop=out.scrollHeight;},t));});}
+        btn.addEventListener("click",run);run();return clr;
+      }
+      var DEMOS={
+        js:function(host){
+          host.innerHTML='<div class="dm-val" id="jv">0</div><div class="dm-row"><button class="dm-btn" data-o="i">x += 1</button><button class="dm-btn" data-o="d">x *= 2</button><button class="dm-btn" data-o="s">x ** 2</button><button class="dm-btn" data-o="r">reset</button></div><div class="dm-out" id="jl">// click a button — JS runs live</div>';
+          var v=0,el=host.querySelector("#jv"),log=host.querySelector("#jl");
+          function put(code,val){v=val;el.textContent=v;var d=document.createElement("div");d.innerHTML='<span class="cmd">&gt; '+code+'</span> &rarr; <span class="hl">'+v+'</span>';log.appendChild(d);log.scrollTop=log.scrollHeight;}
+          host.querySelectorAll(".dm-btn").forEach(function(b){b.addEventListener("click",function(){var o=b.dataset.o;if(o==="i")put("x += 1",v+1);else if(o==="d")put("x *= 2",v*2);else if(o==="s")put("x = x ** 2",v*v);else{v=0;el.textContent=0;log.innerHTML="// reset";}});});
+          return function(){};
+        },
+        ts:function(host){
+          host.innerHTML='<div class="dm-code"><span class="k">const</span> port: <span class="t">number</span> = <input id="tin" value="8080" style="width:9ch"></div><div class="dm-msg" id="tmsg"></div><div class="dm-hint">try typing letters — the type checker complains</div>';
+          var inp=host.querySelector("#tin"),msg=host.querySelector("#tmsg");
+          function chk(){var val=inp.value.trim();var ok=val!==""&&!isNaN(Number(val));if(ok){msg.className="dm-msg good";msg.textContent="\u2713 tsc: type checks \u2014 number";}else{msg.className="dm-msg bad";msg.textContent="\u2717 TS2322: Type 'string' is not assignable to type 'number'.";}}
+          inp.addEventListener("input",chk);chk();return function(){};
+        },
+        html:function(host){
+          host.innerHTML='<div class="dm-split"><textarea class="dm-ta" id="he" spellcheck="false"></textarea><iframe class="dm-frame" id="hf" sandbox="allow-scripts"></iframe></div><div class="dm-hint">edit the HTML \u2014 the preview updates live</div>';
+          var ta=host.querySelector("#he"),fr=host.querySelector("#hf");
+          ta.value="<h1>Hello \ud83d\udc4b</h1>\n<p>Building a page, live.</p>\n<button onclick=\"this.textContent='\u2713 clicked'\">\n  Click me\n</button>";
+          function upd(){fr.srcdoc="<style>body{font-family:system-ui;color:#eee;background:#1c1a17;padding:14px;margin:0}h1{color:#f2a03d;margin:.2em 0}button{background:#1bb0ab;border:0;color:#111;padding:7px 12px;border-radius:6px;cursor:pointer}</style>"+ta.value;}
+          ta.addEventListener("input",upd);upd();return function(){};
+        },
+        css:function(host){
+          host.innerHTML='<div class="dm-css-stage"><div class="dm-box" id="cb">div</div></div><div class="dm-ctl"><label>border-radius <b id="l1">12px</b></label><input type="range" id="r1" min="0" max="50" value="12"><label>rotate <b id="l2">0deg</b></label><input type="range" id="r2" min="-45" max="45" value="0"><label>hue <b id="l3">36</b></label><input type="range" id="r3" min="0" max="360" value="36"></div><div class="dm-hint" id="cc"></div>';
+          var box=host.querySelector("#cb"),r1=host.querySelector("#r1"),r2=host.querySelector("#r2"),r3=host.querySelector("#r3");
+          function upd(){box.style.borderRadius=r1.value+"px";box.style.transform="rotate("+r2.value+"deg)";box.style.background="hsl("+r3.value+",75%,55%)";host.querySelector("#l1").textContent=r1.value+"px";host.querySelector("#l2").textContent=r2.value+"deg";host.querySelector("#l3").textContent=r3.value;host.querySelector("#cc").textContent="border-radius:"+r1.value+"px; transform:rotate("+r2.value+"deg); background:hsl("+r3.value+",75%,55%);";}
+          [r1,r2,r3].forEach(function(c){c.addEventListener("input",upd);});upd();return function(){};
+        },
+        babylon:function(host){
+          host.innerHTML='<canvas class="dm-canvas" id="bc"></canvas><div class="dm-hint">a spinning cube \u2014 real-time 3D (drag to rotate)</div>';
+          var cv=host.querySelector("#bc"),ctx=cv.getContext("2d"),raf,ax=0.5,ay=0.6,drag=false,lx,ly,auto=true;
+          var rc=cv.getBoundingClientRect();cv.width=rc.width*2;cv.height=150*2;ctx.setTransform(2,0,0,2,0,0);
+          var Wd=rc.width,Hd=150;
+          var V=[[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]];
+          var F=[[0,1,2,3],[4,5,6,7],[0,1,5,4],[2,3,7,6],[1,2,6,5],[0,3,7,4]];
+          var C=["#0d7d7a","#1bb0ab","#128f8f","#33cfca","#0f9a97","#22bdb8"];
+          function draw(){ctx.clearRect(0,0,Wd,Hd);var cx=Math.cos(ax),sx=Math.sin(ax),cy=Math.cos(ay),sy=Math.sin(ay);
+            var P=V.map(function(p){var x=p[0],y=p[1],z=p[2];var y2=y*cx-z*sx,z2=y*sx+z*cx;var x2=x*cy+z2*sy,z3=-x*sy+z2*cy;var s=2.6/(z3+4);return [Wd/2+x2*s*34,Hd/2+y2*s*34,z3];});
+            F.map(function(f,i){return {f:f,z:(P[f[0]][2]+P[f[1]][2]+P[f[2]][2]+P[f[3]][2])/4,c:C[i]};}).sort(function(a,b){return a.z-b.z;}).forEach(function(o){ctx.beginPath();o.f.forEach(function(idx,j){var p=P[idx];j?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]);});ctx.closePath();ctx.fillStyle=o.c;ctx.fill();ctx.strokeStyle="rgba(0,0,0,0.3)";ctx.stroke();});
+            if(auto)ay+=0.012;raf=requestAnimationFrame(draw);}
+          draw();
+          function pd(e){drag=true;auto=false;lx=e.clientX;ly=e.clientY;} function pm(e){if(!drag)return;ay+=(e.clientX-lx)*0.01;ax+=(e.clientY-ly)*0.01;lx=e.clientX;ly=e.clientY;} function pu(){drag=false;}
+          cv.addEventListener("pointerdown",pd);window.addEventListener("pointermove",pm);window.addEventListener("pointerup",pu);
+          return function(){cancelAnimationFrame(raf);window.removeEventListener("pointermove",pm);window.removeEventListener("pointerup",pu);};
+        },
+        webgl:function(host){
+          host.innerHTML='<canvas class="dm-canvas" id="gc"></canvas><div class="dm-hint" id="gh">a spinning triangle drawn with real WebGL shaders</div>';
+          var cv=host.querySelector("#gc");var gl=cv.getContext("webgl")||cv.getContext("experimental-webgl");
+          if(!gl){host.querySelector("#gh").textContent="WebGL isn't available in this browser.";return function(){};}
+          var rc=cv.getBoundingClientRect();cv.width=rc.width*2;cv.height=150*2;gl.viewport(0,0,cv.width,cv.height);
+          var vs="attribute vec2 p;attribute vec3 c;varying vec3 v;uniform float t;void main(){float s=sin(t),o=cos(t);mat2 R=mat2(o,-s,s,o);gl_Position=vec4(R*p,0.0,1.0);v=c;}";
+          var fs="precision mediump float;varying vec3 v;void main(){gl_FragColor=vec4(v,1.0);}";
+          function sh(ty,src){var s=gl.createShader(ty);gl.shaderSource(s,src);gl.compileShader(s);return s;}
+          var pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,vs));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(pr);gl.useProgram(pr);
+          var b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);
+          gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([0,0.72, 0.949,0.627,0.239, -0.7,-0.5, 0.106,0.690,0.671, 0.7,-0.5, 0.4,0.55,0.85]),gl.STATIC_DRAW);
+          var pl=gl.getAttribLocation(pr,"p"),cl=gl.getAttribLocation(pr,"c"),tl=gl.getUniformLocation(pr,"t");
+          gl.enableVertexAttribArray(pl);gl.vertexAttribPointer(pl,2,gl.FLOAT,false,20,0);
+          gl.enableVertexAttribArray(cl);gl.vertexAttribPointer(cl,3,gl.FLOAT,false,20,8);
+          var raf,t=0;function dr(){t+=0.02;gl.uniform1f(tl,t);gl.clearColor(0.098,0.082,0.071,1);gl.clear(gl.COLOR_BUFFER_BIT);gl.drawArrays(gl.TRIANGLES,0,3);raf=requestAnimationFrame(dr);}dr();
+          return function(){cancelAnimationFrame(raf);};
+        },
+        go:function(host){return runner(host,'<span class="c">// main.go</span>\n<span class="k">func</span> <span class="t">handler</span>(w, r) {\n  json.NewEncoder(w).Encode(m{<span class="s">"msg"</span>: <span class="s">"hi from Go"</span>})\n}',[
+          {t:'<span class="cmd">$ go run main.go</span>',d:200},{t:'server listening on :8080',d:500},
+          {t:'<span class="cmd">$ curl localhost:8080/hello</span>',d:700},{t:'<span class="ok">200</span> {"msg":"hi from Go"}',d:400}]);},
+        docker:function(host){return runner(host,'<span class="c"># Dockerfile</span>\nFROM golang:1.22 <span class="c">AS</span> build\n...\nFROM scratch',[
+          {t:'<span class="cmd">$ docker build -t atlas .</span>',d:150},{t:'[1/4] FROM golang:1.22',d:300},{t:'[2/4] COPY . .',d:320},{t:'[3/4] RUN go build -o /app',d:460},{t:'[4/4] FROM scratch',d:340},{t:'<span class="ok">\u2714</span> built <span class="hl">atlas:latest</span> (14.2MB)',d:320}]);},
+        terraform:function(host){return runner(host,'<span class="c"># main.tf</span>\n<span class="k">resource</span> <span class="s">"aws_lambda_function"</span> <span class="s">"counter"</span> {}',[
+          {t:'<span class="cmd">$ terraform plan</span>',d:200},{t:'<span class="add">+ aws_lambda_function.counter</span>',d:300},{t:'<span class="add">+ aws_dynamodb_table.visitors</span>',d:300},{t:'Plan: <span class="hl">2 to add</span>, 0 to change, 0 to destroy',d:350},{t:'<span class="cmd">$ terraform apply -auto-approve</span>',d:500},{t:'<span class="ok">Apply complete!</span> Resources: 2 added.',d:400}]);},
+        ansible:function(host){return runner(host,'<span class="c"># site.yml</span>\n- hosts: web\n  roles: [ nginx, monitoring ]',[
+          {t:'<span class="cmd">$ ansible-playbook site.yml</span>',d:200},{t:'TASK [nginx : install] .......... <span class="ok">ok</span>',d:320},{t:'TASK [nginx : template conf] .... <span class="w">changed</span>',d:320},{t:'TASK [monitoring : exporter] .... <span class="w">changed</span>',d:320},{t:'<span class="hl">PLAY RECAP</span>  ok=12  changed=2  failed=0',d:360}]);},
+        linux:function(host){
+          host.innerHTML='<div class="dm-out" id="lo">marko@atlas:~$ type a command (try: ls, uname -a, whoami, echo hi)</div><input class="dm-ti" id="li" placeholder="ls" autocomplete="off" spellcheck="false">';
+          var out=host.querySelector("#lo"),inp=host.querySelector("#li");
+          var C={ls:"atlas  cloud-resume  infra  resume.pdf",pwd:"/home/marko",whoami:"marko","uname -a":"Linux atlas 6.8.0 x86_64 GNU/Linux",uname:"Linux",date:new Date().toString().slice(0,24),help:"ls  pwd  whoami  uname  date  echo"};
+          function run(cmd){cmd=cmd.trim();if(!cmd)return;var a=document.createElement("div");a.innerHTML='<span class="cmd">$ '+cmd.replace(/</g,"&lt;")+'</span>';out.appendChild(a);var r;if(C[cmd]!==undefined)r=C[cmd];else if(cmd.indexOf("echo ")===0)r=cmd.slice(5);else r="bash: "+cmd.split(" ")[0]+": command not found";var e=document.createElement("div");e.textContent=r;out.appendChild(e);out.scrollTop=out.scrollHeight;}
+          inp.addEventListener("keydown",function(e){if(e.key==="Enter"){run(inp.value);inp.value="";}});return function(){};
+        },
+        nginx:function(host){return runner(host,'<span class="c"># nginx.conf</span>\nupstream app { server a; server b; }\nlocation / { proxy_pass http://app; }',[
+          {t:'<span class="cmd">GET /playground</span>',d:220},{t:'nginx \u2192 <span class="hl">app-a</span> (round-robin)',d:340},{t:'<span class="ok">200 OK</span> \u00b7 34ms',d:300},{t:'<span class="cmd">GET /playground</span>',d:520},{t:'nginx \u2192 <span class="hl">app-b</span> (round-robin)',d:340},{t:'<span class="ok">200 OK</span> \u00b7 29ms',d:300}]);},
+        prometheus:function(host){
+          host.innerHTML='<div class="dm-code"><span class="t">rate</span>(http_requests_total[5m])</div><canvas class="dm-canvas" id="pc" style="height:120px"></canvas><div class="dm-hint" id="pv">scraping every 1s\u2026</div>';
+          var cv=host.querySelector("#pc"),ctx=cv.getContext("2d"),pv=host.querySelector("#pv");
+          var rc=cv.getBoundingClientRect();cv.width=rc.width*2;cv.height=120*2;ctx.setTransform(2,0,0,2,0,0);
+          var Wd=rc.width,Hd=120,data=[];for(var i=0;i<60;i++)data.push(30+Math.random()*20);
+          var iv=setInterval(function(){data.push(35+Math.random()*20+Math.sin(Date.now()/1800)*12);data.shift();
+            ctx.clearRect(0,0,Wd,Hd);ctx.strokeStyle="rgba(57,50,42,0.5)";ctx.lineWidth=1;for(var y=0;y<Hd;y+=24){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(Wd,y);ctx.stroke();}
+            var mx=80;ctx.beginPath();data.forEach(function(v,i){var x=i/(data.length-1)*Wd,yy=Hd-(v/mx)*Hd;i?ctx.lineTo(x,yy):ctx.moveTo(x,yy);});ctx.strokeStyle="#f2a03d";ctx.lineWidth=2;ctx.stroke();
+            ctx.lineTo(Wd,Hd);ctx.lineTo(0,Hd);ctx.closePath();ctx.fillStyle="rgba(242,160,61,0.12)";ctx.fill();
+            pv.textContent="current: "+data[data.length-1].toFixed(1)+" req/s";},900);
+          return function(){clearInterval(iv);};
+        },
+        aws:function(host){
+          var API="https://cztjgciu2465brvyb3srv22cka0rqyca.lambda-url.us-east-1.on.aws/";
+          host.innerHTML='<div class="dm-code"><span class="c">// this page\'s real counter</span>\nrequest \u2192 Lambda \u2192 DynamoDB \u2192 count</div><div class="dm-out" id="ao"></div><button class="dm-run">\u25b6 Invoke</button>';
+          var out=host.querySelector("#ao"),btn=host.querySelector(".dm-run"),tm=[];
+          function clr(){tm.forEach(clearTimeout);tm=[];}
+          function put(h){var d=document.createElement("div");d.innerHTML=h;out.appendChild(d);out.scrollTop=out.scrollHeight;}
+          function run(){clr();out.innerHTML="";[[300,'<span class="cmd">request \u2192 CloudFront</span>'],[600,'\u2192 Lambda (Python) invoked'],[900,'\u2192 DynamoDB atomic update'],[1200,'fetching real count\u2026']].forEach(function(s){tm.push(setTimeout(function(){put(s[1]);},s[0]));});
+            tm.push(setTimeout(function(){fetch(API).then(function(r){return r.json();}).then(function(j){put('<span class="ok">200</span> {"count": <span class="hl">'+j.count+'</span>} \u2014 real, live');}).catch(function(){put('<span class="w">counter unreachable right now</span>');});},1550));}
+          btn.addEventListener("click",run);run();return clr;
+        }
+      };
+
+      var bg=document.getElementById("modal-bg"),activeCleanup=null;
+      function openDemo(k){if(activeCleanup){try{activeCleanup();}catch(e){}activeCleanup=null;}var host=document.getElementById("m-demo");if(!host)return;host.innerHTML="";var d=DEMOS[k];if(d){try{activeCleanup=d(host)||null;}catch(e){host.innerHTML='<div class="dm-msg">demo unavailable</div>';}}}
+      function closeM(){bg.classList.remove("open");if(activeCleanup){try{activeCleanup();}catch(e){}activeCleanup=null;}var host=document.getElementById("m-demo");if(host)host.innerHTML="";}
+      function open(k){var t=TECH[k];document.getElementById("m-name").textContent=t.name;document.getElementById("m-tag").textContent=t.tag;document.getElementById("m-what").textContent=t.what;document.getElementById("m-how").textContent=t.how;document.getElementById("m-icon").outerHTML='<span id="m-icon">'+chip(t)+'</span>';openDemo(k);bg.classList.add("open");bg.scrollTop=0;}
       document.querySelectorAll(".cap-grid").forEach(function(g){g.addEventListener("click",function(e){var b=e.target.closest(".cap");if(b)open(b.dataset.k);});});
-      document.getElementById("modal-close").addEventListener("click",function(){bg.classList.remove("open");});
-      bg.addEventListener("click",function(e){if(e.target===bg)bg.classList.remove("open");});
-      document.addEventListener("keydown",function(e){if(e.key==="Escape")bg.classList.remove("open");});
+      document.getElementById("modal-close").addEventListener("click",closeM);
+      bg.addEventListener("click",function(e){if(e.target===bg)closeM();});
+      document.addEventListener("keydown",function(e){if(e.key==="Escape")closeM();});
     })();
 
     /* ===== CONTACT FORM ===== */
