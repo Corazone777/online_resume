@@ -2099,19 +2099,19 @@
         <div class="hero-stack">
           <span class="lbl">stack</span>
           <span class="set">
-            <span class="tchip" title="Go"><img src="https://cdn.simpleicons.org/go" alt="Go" data-fb="GO"
+            <span class="tchip dark" title="Go"><img src="https://cdn.simpleicons.org/go" alt="Go" data-fb="GO"
                 onerror="techFallback(this)"></span>
-            <span class="tchip" title="Docker"><img src="https://cdn.simpleicons.org/docker" alt="Docker" data-fb="DK"
+            <span class="tchip dark" title="Docker"><img src="https://cdn.simpleicons.org/docker" alt="Docker" data-fb="DK"
                 onerror="techFallback(this)"></span>
-            <span class="tchip" title="Terraform"><img src="https://cdn.simpleicons.org/terraform" alt="Terraform"
+            <span class="tchip dark" title="Terraform"><img src="https://cdn.simpleicons.org/terraform" alt="Terraform"
                 data-fb="TF" onerror="techFallback(this)"></span>
-            <span class="tchip" title="Ansible"><img src="https://cdn.simpleicons.org/ansible" alt="Ansible"
+            <span class="tchip dark" title="Ansible"><img src="https://cdn.simpleicons.org/ansible" alt="Ansible"
                 data-fb="AN" onerror="techFallback(this)"></span>
             <span class="tchip dark" title="Linux"><img src="https://cdn.simpleicons.org/linux" alt="Linux" data-fb="LX"
                 onerror="techFallback(this)"></span>
-            <span class="tchip" title="nginx"><img src="https://cdn.simpleicons.org/nginx" alt="nginx" data-fb="NX"
+            <span class="tchip dark" title="nginx"><img src="https://cdn.simpleicons.org/nginx" alt="nginx" data-fb="NX"
                 onerror="techFallback(this)"></span>
-            <span class="tchip" title="AWS"><img src="https://cdn.simpleicons.org/amazonwebservices" alt="AWS"
+            <span class="tchip dark" title="AWS"><img src="https://cdn.simpleicons.org/amazonwebservices" alt="AWS"
                 data-fb="AWS" onerror="techFallback(this)"></span>
           </span>
         </div>
@@ -2610,7 +2610,7 @@
         aws: { name: "AWS", slug: "amazonwebservices", fb: "AWS", tag: "cloud", what: "Amazon's cloud platform.", how: "This site runs serverless on AWS — S3 + CloudFront front end, Lambda + DynamoDB counter, all in Terraform." }
       };
       var FE = ["js", "ts", "babylon", "webgl", "html", "css"], BE = ["go", "docker", "terraform", "ansible", "linux", "nginx", "prometheus", "aws"];
-      function chip(t) { var c = t.dark ? "tchip dark" : "tchip"; if (t.custom) return '<span class="' + c + '">' + t.custom + '</span>'; return '<span class="' + c + '"><img src="https://cdn.simpleicons.org/' + t.slug + '" alt="' + t.name + '" data-fb="' + t.fb + '" onerror="techFallback(this)"></span>'; }
+      function chip(t) { var c = t.dark ? "tchip dark" : "tchip dark"; if (t.custom) return '<span class="' + c + '">' + t.custom + '</span>'; return '<span class="' + c + '"><img src="https://cdn.simpleicons.org/' + t.slug + '" alt="' + t.name + '" data-fb="' + t.fb + '" onerror="techFallback(this)"></span>'; }
       function card(k) { var t = TECH[k]; return '<button class="cap" data-k="' + k + '">' + chip(t) + '<span class="cn">' + t.name + '</span><span class="ct">' + t.tag + '</span></button>'; }
       document.getElementById("cap-fe").innerHTML = FE.map(card).join("");
       document.getElementById("cap-be").innerHTML = BE.map(card).join("");
