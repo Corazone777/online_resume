@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Marko Lučić — Developer · Interactive &amp; Gamified Software</title>
-  <meta name="description" content="Marko Lučić — a developer who builds highly interactive, gamified applications and games, and runs the backend, infrastructure, and Linux behind them." />
+  <title>Marko Lucić — Developer · Interactive &amp; Gamified Software</title>
+  <meta name="description" content="Marko Lucić — a developer who builds highly interactive, gamified applications and games, and runs the backend, infrastructure, and Linux behind them." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -261,7 +261,7 @@
 
   <!-- NAV -->
   <nav class="topnav">
-    <span class="brand"><svg class="ico"><use href="#i-cube"/></svg> Marko <b>Lučić</b></span>
+    <span class="brand"><svg class="ico"><use href="#i-cube"/></svg> Marko <b>Lucić</b></span>
     <span class="links"><a href="#atlas">Atlas</a><a href="#build">How it's built</a><a href="#skills">Capabilities</a><a href="#contact">Contact</a></span>
   </nav>
 
@@ -270,7 +270,7 @@
     <span class="blob a"></span><span class="blob b"></span>
     <div class="hero-inner">
       <div class="hero-copy">
-        <p class="hero-name">Marko Lučić — developer</p>
+        <p class="hero-name">Marko Lucić — developer</p>
         <h1 class="hero-h1">I build software people want to <span class="hl">play with</span>.</h1>
         <p class="hero-p">A developer focused on <b>highly interactive, gamified applications and games</b> — and the <b>backend, infrastructure, and Linux</b> that make them ship and stay up. This page is interactive too — <b>everything here is meant to be poked at →</b></p>
         <div class="hero-cta">
@@ -673,8 +673,8 @@
         babylon:function(host){
           host.innerHTML='<canvas class="dm-canvas" id="bc"></canvas><div class="dm-hint">a spinning cube \u2014 real-time 3D (drag to rotate)</div>';
           var cv=host.querySelector("#bc"),ctx=cv.getContext("2d"),raf,ax=0.5,ay=0.6,drag=false,lx,ly,auto=true;
-          var rc=cv.getBoundingClientRect();cv.width=rc.width*2;cv.height=150*2;ctx.setTransform(2,0,0,2,0,0);
-          var Wd=rc.width,Hd=150;
+          var rc=cv.getBoundingClientRect();var CW=rc.width||460;cv.width=CW*2;cv.height=150*2;ctx.setTransform(2,0,0,2,0,0);
+          var Wd=CW,Hd=150;
           var V=[[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]];
           var F=[[0,1,2,3],[4,5,6,7],[0,1,5,4],[2,3,7,6],[1,2,6,5],[0,3,7,4]];
           var C=["#0d7d7a","#1bb0ab","#128f8f","#33cfca","#0f9a97","#22bdb8"];
@@ -691,7 +691,7 @@
           host.innerHTML='<canvas class="dm-canvas" id="gc"></canvas><div class="dm-hint" id="gh">a spinning triangle drawn with real WebGL shaders</div>';
           var cv=host.querySelector("#gc");var gl=cv.getContext("webgl")||cv.getContext("experimental-webgl");
           if(!gl){host.querySelector("#gh").textContent="WebGL isn't available in this browser.";return function(){};}
-          var rc=cv.getBoundingClientRect();cv.width=rc.width*2;cv.height=150*2;gl.viewport(0,0,cv.width,cv.height);
+          var rc=cv.getBoundingClientRect();var CW=rc.width||460;cv.width=CW*2;cv.height=150*2;gl.viewport(0,0,cv.width,cv.height);
           var vs="attribute vec2 p;attribute vec3 c;varying vec3 v;uniform float t;void main(){float s=sin(t),o=cos(t);mat2 R=mat2(o,-s,s,o);gl_Position=vec4(R*p,0.0,1.0);v=c;}";
           var fs="precision mediump float;varying vec3 v;void main(){gl_FragColor=vec4(v,1.0);}";
           function sh(ty,src){var s=gl.createShader(ty);gl.shaderSource(s,src);gl.compileShader(s);return s;}
@@ -725,8 +725,8 @@
         prometheus:function(host){
           host.innerHTML='<div class="dm-code"><span class="t">rate</span>(http_requests_total[5m])</div><canvas class="dm-canvas" id="pc" style="height:120px"></canvas><div class="dm-hint" id="pv">scraping every 1s\u2026</div>';
           var cv=host.querySelector("#pc"),ctx=cv.getContext("2d"),pv=host.querySelector("#pv");
-          var rc=cv.getBoundingClientRect();cv.width=rc.width*2;cv.height=120*2;ctx.setTransform(2,0,0,2,0,0);
-          var Wd=rc.width,Hd=120,data=[];for(var i=0;i<60;i++)data.push(30+Math.random()*20);
+          var rc=cv.getBoundingClientRect();var CW=rc.width||460;cv.width=CW*2;cv.height=120*2;ctx.setTransform(2,0,0,2,0,0);
+          var Wd=CW,Hd=120,data=[];for(var i=0;i<60;i++)data.push(30+Math.random()*20);
           var iv=setInterval(function(){data.push(35+Math.random()*20+Math.sin(Date.now()/1800)*12);data.shift();
             ctx.clearRect(0,0,Wd,Hd);ctx.strokeStyle="rgba(57,50,42,0.5)";ctx.lineWidth=1;for(var y=0;y<Hd;y+=24){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(Wd,y);ctx.stroke();}
             var mx=80;ctx.beginPath();data.forEach(function(v,i){var x=i/(data.length-1)*Wd,yy=Hd-(v/mx)*Hd;i?ctx.lineTo(x,yy):ctx.moveTo(x,yy);});ctx.strokeStyle="#f2a03d";ctx.lineWidth=2;ctx.stroke();
@@ -749,7 +749,7 @@
       var bg=document.getElementById("modal-bg"),activeCleanup=null;
       function openDemo(k){if(activeCleanup){try{activeCleanup();}catch(e){}activeCleanup=null;}var host=document.getElementById("m-demo");if(!host)return;host.innerHTML="";var d=DEMOS[k];if(d){try{activeCleanup=d(host)||null;}catch(e){host.innerHTML='<div class="dm-msg">demo unavailable</div>';}}}
       function closeM(){bg.classList.remove("open");if(activeCleanup){try{activeCleanup();}catch(e){}activeCleanup=null;}var host=document.getElementById("m-demo");if(host)host.innerHTML="";}
-      function open(k){var t=TECH[k];document.getElementById("m-name").textContent=t.name;document.getElementById("m-tag").textContent=t.tag;document.getElementById("m-what").textContent=t.what;document.getElementById("m-how").textContent=t.how;document.getElementById("m-icon").outerHTML='<span id="m-icon">'+chip(t)+'</span>';openDemo(k);bg.classList.add("open");bg.scrollTop=0;}
+      function open(k){var t=TECH[k];document.getElementById("m-name").textContent=t.name;document.getElementById("m-tag").textContent=t.tag;document.getElementById("m-what").textContent=t.what;document.getElementById("m-how").textContent=t.how;document.getElementById("m-icon").outerHTML='<span id="m-icon">'+chip(t)+'</span>';bg.classList.add("open");bg.scrollTop=0;openDemo(k);}
       document.querySelectorAll(".cap-grid").forEach(function(g){g.addEventListener("click",function(e){var b=e.target.closest(".cap");if(b)open(b.dataset.k);});});
       document.getElementById("modal-close").addEventListener("click",closeM);
       bg.addEventListener("click",function(e){if(e.target===bg)closeM();});
