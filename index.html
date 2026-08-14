@@ -564,7 +564,7 @@
       var cX=document.getElementById("c-x"),cY=document.getElementById("c-y"),cZ=document.getElementById("c-z"),cS=document.getElementById("c-s"),cC=document.getElementById("c-c");
       var vX=document.getElementById("v-x"),vY=document.getElementById("v-y"),vZ=document.getElementById("v-z"),vS=document.getElementById("v-s"),vC=document.getElementById("v-c");
       function syncLabels(){vX.textContent=box.gx.toFixed(1);vY.textContent=box.gy.toFixed(1);vZ.textContent=box.z.toFixed(1);vC.textContent=box.color;}
-      function syncInputs(){cX.value=box.gx;cY.value=box.gy;cZ.value=box.z;cS.value=box.size;cC.value=box.color;}
+      function syncInputs(){cX.value=box.gx;cY.value=box.gy;cZ.value=box.z;cC.value=box.color;}
       cX.addEventListener("input",function(){box.gx=+cX.value;syncLabels();});
       cY.addEventListener("input",function(){box.gy=+cY.value;syncLabels();});
       cZ.addEventListener("input",function(){box.z=+cZ.value;syncLabels();});
