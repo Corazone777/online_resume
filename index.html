@@ -2083,7 +2083,8 @@
         <h1 class="hero-h1">I build software people want to <span class="hl">play with</span>.</h1>
         <p class="hero-p">A developer focused on <b>highly interactive, gamified applications and games</b> — and the
           <b>backend, infrastructure, and Linux</b> that make them ship and stay up. This page is interactive too —
-          <b>everything here is meant to be poked at →</b></p>
+          <b>everything here is meant to be poked at →</b>
+        </p>
         <div class="hero-cta">
           <a class="btn primary" href="#atlas"><svg class="ico">
               <use href="#i-cube" />
@@ -2146,7 +2147,8 @@
       <h2 class="section-title">Atlas — a game engine that lives in the browser.</h2>
       <p class="section-lede">A browser-based 3D editor: write code against a live scene, manipulate meshes, import
         <code>.glb</code> models, and export a playable game — served by a Go backend. Here's the idea in miniature —
-        <b>edit the code, then drag the box or tweak it from the inspector.</b></p>
+        <b>edit the code, then drag the box or tweak it from the inspector.</b>
+      </p>
 
       <div class="studio">
         <div class="studio-chrome"><span class="lights"><i></i><i></i><i></i></span><span
@@ -2323,7 +2325,8 @@
         <div class="term-head"><span class="lights"><i></i><i></i><i></i></span><span>bash — marko@atlas</span></div>
         <div class="term-body" id="term-body">
           <div class="row out">Type <span class="hl">help</span> to see what's available, or click a command below.
-            <span class="w">↓</span></div>
+            <span class="w">↓</span>
+          </div>
         </div>
         <div class="term-input-line"><span class="prompt"><span class="u">marko</span>@atlas:~$</span><input
             id="term-input" autocomplete="off" spellcheck="false" aria-label="terminal input"
@@ -2465,7 +2468,7 @@
       reset();
       function start() { reset(); player.x = W * 0.28; player.y = H * 0.42; player.r = Math.max(6, Math.min(W, H) * 0.02); speed = Math.max(120, W * 0.28); STATE = "playing"; canvas.classList.add("playing"); overlay.classList.add("hidden"); flap(); }
       function flap() { if (STATE !== "playing") return; player.vy = -Math.max(320, H * 0.86); }
-      function over() { if (STATE !== "playing") return; burst(player.x, player.y, 26); shake = 1; if (score > best) { best = score; try { localStorage.setItem("mg_best", best); } catch (e) { } } if (bestEl) bestEl.textContent = best; STATE = "over"; canvas.classList.remove("playing"); ovTitle.textContent = "Game over"; ovSub.textContent = "score " + score + " · best " + best; playBtn.innerHTML = '<svg class="ico fill"><use href="#i-play"/></svg> Play again'; overlay.classList.remove("hidden"); }
+      function over() { if (STATE !== "playing") return; burst(player.x, player.y, 26); shake = 0; if (score > best) { best = score; try { localStorage.setItem("mg_best", best); } catch (e) { } } if (bestEl) bestEl.textContent = best; STATE = "over"; canvas.classList.remove("playing"); ovTitle.textContent = "Game over"; ovSub.textContent = "score " + score + " · best " + best; playBtn.innerHTML = '<svg class="ico fill"><use href="#i-play"/></svg> Play again'; overlay.classList.remove("hidden"); }
       function spawnGate() { var gap = Math.max(H * 0.30, player.r * 8) - Math.min(score * 1.5, H * 0.08); var m = H * 0.12; var gy = m + Math.random() * (H - gap - m * 2); gates.push({ x: W + 40, w: Math.max(34, W * 0.055), gapY: gy, gapH: gap, passed: false }); }
       function burst(x, y, n) { for (var i = 0; i < n; i++) { var a = Math.random() * Math.PI * 2, sp = 40 + Math.random() * 160; particles.push({ x: x, y: y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: 0.6 + Math.random() * 0.4, t: 0 }); } }
       var GRAV = 1380;
@@ -2623,10 +2626,49 @@
       }
       var DEMOS = {
         js: function (host) {
-          host.innerHTML = '<div class="dm-val" id="jv">0</div><div class="dm-row"><button class="dm-btn" data-o="i">x += 1</button><button class="dm-btn" data-o="d">x *= 2</button><button class="dm-btn" data-o="s">x ** 2</button><button class="dm-btn" data-o="r">reset</button></div><div class="dm-out" id="jl">// click a button — JS runs live</div>';
-          var v = 0, el = host.querySelector("#jv"), log = host.querySelector("#jl");
-          function put(code, val) { v = val; el.textContent = v; var d = document.createElement("div"); d.innerHTML = '<span class="cmd">&gt; ' + code + '</span> &rarr; <span class="hl">' + v + '</span>'; log.appendChild(d); log.scrollTop = log.scrollHeight; }
-          host.querySelectorAll(".dm-btn").forEach(function (b) { b.addEventListener("click", function () { var o = b.dataset.o; if (o === "i") put("x += 1", v + 1); else if (o === "d") put("x *= 2", v * 2); else if (o === "s") put("x = x ** 2", v * v); else { v = 0; el.textContent = 0; log.innerHTML = "// reset"; } }); });
+          var ORIG = [5, 2, 8, 1, 9, 3], arr = ORIG.slice();
+          host.innerHTML =
+            '<div id="jsbars" style="display:flex;align-items:flex-end;justify-content:center;gap:7px;height:100px;padding:14px 10px 8px"></div>' +
+            '<div class="dm-row">' +
+            '<button class="dm-btn" data-o="map">.map(x =&gt; x*2)</button>' +
+            '<button class="dm-btn" data-o="filter">.filter(x =&gt; x%2)</button>' +
+            '<button class="dm-btn" data-o="sort">.sort()</button>' +
+            '<button class="dm-btn" data-o="reverse">.reverse()</button>' +
+            '<button class="dm-btn" data-o="reset">reset</button>' +
+            '</div>' +
+            '<div class="dm-out" id="jslog">// click a method \u2014 it runs on the live array</div>';
+          var bars = host.querySelector("#jsbars"), log = host.querySelector("#jslog");
+          function render() {
+            bars.innerHTML = "";
+            if (!arr.length) { bars.innerHTML = '<div style="font-family:var(--font-mono);font-size:.72rem;color:var(--dim)">[ ] \u2014 empty array</div>'; return; }
+            var max = Math.max.apply(null, arr.concat([1]));
+            arr.forEach(function (v) {
+              var col = document.createElement("div");
+              col.style.cssText = "display:flex;flex-direction:column;align-items:center;gap:5px";
+              var b = document.createElement("div");
+              b.style.cssText = "width:24px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,var(--amber),var(--teal-dp));height:" + Math.max(6, (v / max) * 66) + "px";
+              var n = document.createElement("div");
+              n.textContent = v; n.style.cssText = "font-family:var(--font-mono);font-size:.66rem;color:var(--muted)";
+              col.appendChild(b); col.appendChild(n); bars.appendChild(col);
+            });
+          }
+          function put(code) {
+            var d = document.createElement("div");
+            d.innerHTML = '<span class="cmd">&gt; nums' + code + '</span> &rarr; <span class="hl">[' + arr.join(", ") + ']</span>';
+            log.appendChild(d); log.scrollTop = log.scrollHeight;
+          }
+          host.querySelectorAll(".dm-btn").forEach(function (b) {
+            b.addEventListener("click", function () {
+              var o = b.dataset.o;
+              if (o === "map") { arr = arr.map(function (x) { return x * 2; }); put(".map(x =&gt; x * 2)"); }
+              else if (o === "filter") { arr = arr.filter(function (x) { return x % 2; }); put(".filter(x =&gt; x % 2)"); }
+              else if (o === "sort") { arr = arr.slice().sort(function (a, b) { return a - b; }); put(".sort((a,b) =&gt; a - b)"); }
+              else if (o === "reverse") { arr = arr.slice().reverse(); put(".reverse()"); }
+              else { arr = ORIG.slice(); log.innerHTML = "// reset to [5, 2, 8, 1, 9, 3]"; }
+              render();
+            });
+          });
+          render();
           return function () { };
         },
         ts: function (host) {
