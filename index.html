@@ -1997,6 +1997,11 @@
         opacity: 1;
       }
     }
+
+    .code-wrap { position: relative; flex: 1; min-height: 220px; background: var(--viewport); }
+    #code-hl { position: absolute; inset: 0; margin: 0; padding: 0.7rem 0.8rem; font-family: var(--font-mono); font-size: 0.72rem; line-height: 1.6; white-space: pre; overflow: hidden; color: var(--chalk); pointer-events: none; }
+    #code-edit { position: absolute; inset: 0; margin: 0; padding: 0.7rem 0.8rem; font-family: var(--font-mono); font-size: 0.72rem; line-height: 1.6; white-space: pre; overflow: auto; border: 0; background: transparent; color: transparent; caret-color: var(--amber); resize: none; outline: none; }
+    #code-edit::selection { background: rgba(242, 160, 61, 0.3); }
   </style>
 </head>
 
@@ -2151,7 +2156,7 @@
       <h2 class="section-title">Atlas — a game engine that lives in the browser.</h2>
       <p class="section-lede">A browser-based 3D editor: write code against a live scene, manipulate meshes, import
         <code>.glb</code> models, and export a playable game — served by a Go backend. Here's the idea in miniature —
-        <b>edit the code, then drag the box or tweak it from the inspector.</b>
+        <b>edit the code, then drag the box or tweak it from the editor.</b>
       </p>
 
       <div class="studio">
@@ -2161,72 +2166,24 @@
             </svg> Arcade Studio</span></div>
         <div class="studio-tabs">
           <button data-code="f1" class="on">scene.ts</button>
-          <button data-code="f2">move.ts</button>
-          <button id="run-code" class="act"><svg class="ico fill">
-              <use href="#i-play" />
-            </svg> Run</button>
+          <span style="margin-left:auto;font-family:var(--font-mono);font-size:0.72rem;color:var(--dim);align-self:center">box.ts</span>
+          <button id="run-code" class="act"><use href="#i-play" />Run</button>
         </div>
         <div class="studio-body">
-          <div class="studio-left">
-            <div class="code">
-              <div class="code-pane on" id="code-f1">
-                <div class="ln"><span class="n">1</span><span class="c"><span class="tk-com">// Extend your scene
-                      here</span></span></div>
-                <div class="ln"><span class="n">2</span><span class="c"></span></div>
-                <div class="ln"><span class="n">3</span><span class="c"><span class="tk-key">let</span> scene: <span
-                      class="tk-type">BABYLON</span>.<span class="tk-type">Scene</span>;</span></div>
-                <div class="ln"><span class="n">4</span><span class="c"><span class="tk-key">let</span> box =
-                    scene.<span class="tk-fn">getMeshByName</span>(<span class="tk-str">"Box"</span>);</span></div>
-                <div class="ln"><span class="n">5</span><span class="c">box.position.y = <span
-                      class="tk-num">1</span>;</span></div>
-                <div class="ln"><span class="n">6</span><span class="c"></span></div>
-                <div class="ln"><span class="n">7</span><span class="c"><span class="tk-com">/* spin it every frame
-                      */</span></span></div>
-                <div class="ln"><span class="n">8</span><span class="c">scene.<span
-                      class="tk-fn">onBeforeRenderObservable</span>.<span class="tk-fn">add</span>(() => {</span></div>
-                <div class="ln"><span class="n">9</span><span class="c"> box.rotation.y += <span
-                      class="tk-num">0.01</span>;</span></div>
-                <div class="ln"><span class="n">10</span><span class="c">});</span></div>
-                <div class="ln"><span class="n">11</span><span class="c"></span></div>
-                <div class="ln"><span class="n">12</span><span class="c"><span class="tk-key">const</span> mat = <span
-                      class="tk-key">new</span> <span class="tk-type">BABYLON</span>.<span
-                      class="tk-fn">StandardMaterial</span>(<span class="tk-str">"m"</span>);</span></div>
-                <div class="ln"><span class="n">13</span><span class="c">mat.diffuseColor = <span
-                      class="tk-type">BABYLON</span>.<span class="tk-type">Color3</span>.<span
-                      class="tk-fn">FromHexString</span>(<span class="tk-str">"#f2a03d"</span>);</span></div>
-                <div class="ln"><span class="n">14</span><span class="c">box.material = mat;</span></div>
-              </div>
-              <div class="code-pane" id="code-f2">
-                <div class="ln"><span class="n">1</span><span class="c"><span class="tk-com">// Player movement
-                      (WASD)</span></span></div>
-                <div class="ln"><span class="n">2</span><span class="c"><span class="tk-key">const</span> speed = <span
-                      class="tk-num">0.15</span>;</span></div>
-                <div class="ln"><span class="n">3</span><span class="c">scene.<span
-                      class="tk-fn">onKeyboardObservable</span>.<span class="tk-fn">add</span>((kb) => {</span></div>
-                <div class="ln"><span class="n">4</span><span class="c"> <span class="tk-key">const</span> k =
-                    kb.event.key;</span></div>
-                <div class="ln"><span class="n">5</span><span class="c"> <span class="tk-key">if</span> (k === <span
-                      class="tk-str">"w"</span>) box.position.z += speed;</span></div>
-                <div class="ln"><span class="n">6</span><span class="c"> <span class="tk-key">if</span> (k === <span
-                      class="tk-str">"s"</span>) box.position.z -= speed;</span></div>
-                <div class="ln"><span class="n">7</span><span class="c"> <span class="tk-key">if</span> (k === <span
-                      class="tk-str">"a"</span>) box.rotation.y -= <span class="tk-num">0.05</span>;</span></div>
-                <div class="ln"><span class="n">8</span><span class="c"> <span class="tk-key">if</span> (k === <span
-                      class="tk-str">"d"</span>) box.rotation.y += <span class="tk-num">0.05</span>;</span></div>
-                <div class="ln"><span class="n">9</span><span class="c">});</span></div>
-              </div>
+                    <div class="studio-left">
+            <div class="code-wrap">
+              <pre id="code-hl" aria-hidden="true"></pre>
+              <textarea id="code-edit" spellcheck="false" wrap="off"></textarea>
             </div>
             <div class="console" id="studio-console">
-              <div class="cl"><span class="ts">[8:36:29 PM]</span> — Compiling scene.ts — <span class="ok">OK</span>
-              </div>
-              <div class="cl"><span class="ts">[8:36:31 PM]</span> — Scene rendered — <span class="ok">OK</span></div>
+              <div class="cl"><span class="ts">ready</span> — edit the code, hit <span class="ok">Run</span> — it drives the box →</div>
             </div>
           </div>
 
           <div class="iso-stage">
             <span class="vlabel">PERSPECTIVE · isometric</span>
             <canvas id="iso" aria-label="isometric editor: drag the box to move it"></canvas>
-            <span class="drag-hint">drag the box · or use the inspector →</span>
+            <span class="drag-hint">drag the box · or use the editor</span>
           </div>
 
           <div class="studio-insp">
@@ -2537,22 +2494,14 @@
       canvas.addEventListener("keydown", function (e) { if ((e.code === "Space" || e.code === "ArrowUp") && STATE === "playing") { e.preventDefault(); flap(); } });
     })();
 
-    /* ===== STUDIO: code tabs + console ===== */
-    (function () {
-      var tabs = document.querySelectorAll(".studio-tabs button[data-code]");
-      tabs.forEach(function (t) { t.addEventListener("click", function () { tabs.forEach(function (x) { x.classList.remove("on"); }); t.classList.add("on"); document.querySelectorAll(".code-pane").forEach(function (p) { p.classList.remove("on"); }); var pane = document.getElementById(t.dataset.code === "f1" ? "code-f1" : "code-f2"); if (pane) pane.classList.add("on"); }); });
-      function cnow() { var d = new Date(); var h = d.getHours() % 12 || 12; var m = ("" + d.getMinutes()).padStart(2, "0"); var s = ("" + d.getSeconds()).padStart(2, "0"); return "[" + h + ":" + m + ":" + s + " " + (d.getHours() < 12 ? "AM" : "PM") + "]"; }
-      var run = document.getElementById("run-code");
-      if (run) run.addEventListener("click", function () { var c = document.getElementById("studio-console"); if (!c) return; var row = document.createElement("div"); row.className = "cl"; row.innerHTML = '<span class="ts">' + cnow() + '</span> — Recompiled &amp; rendered — <span class="ok">OK</span>'; c.appendChild(row); c.scrollTop = c.scrollHeight; });
-    })();
-
-    /* ===== ISOMETRIC EDITOR ===== */
+        /* ===== ISOMETRIC EDITOR (code-driven, highlighted) ===== */
     (function () {
       var cv = document.getElementById("iso"); if (!cv) return; var ctx = cv.getContext("2d");
       var dpr = Math.min(window.devicePixelRatio || 1, 2), W, H, cx, cy;
       var TILE_W = 50, TILE_H = 25, LIFT = 28, N = 6;
-      var DEF = { gx: 2, gy: 2, z: 0, size: 1, color: "#f2a03d" };
-      var box = Object.assign({}, DEF);
+      var DEF = { gx: 2, gy: 2, z: 0, size: 1, color: "#f2a03d", spin: false };
+      var box = Object.assign({}, DEF), spinAngle = 0;
+      var L = [0.4, 0.35, 0.85], Ll = Math.hypot(L[0], L[1], L[2]); L = [L[0] / Ll, L[1] / Ll, L[2] / Ll];
       function resize() { var r = cv.getBoundingClientRect(); W = r.width; H = r.height; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); cx = W / 2; cy = H * 0.30; }
       resize(); window.addEventListener("resize", resize);
       function iso(gx, gy, z) { return [cx + (gx - gy) * TILE_W / 2, cy + (gx + gy) * TILE_H / 2 - z * LIFT]; }
@@ -2560,20 +2509,35 @@
       function shade(hex, f) { var n = parseInt(hex.slice(1), 16), r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255; return "rgb(" + Math.min(255, r * f | 0) + "," + Math.min(255, g * f | 0) + "," + Math.min(255, b * f | 0) + ")"; }
       var dragging = false;
       function draw(now) {
-        var bob = dragging ? 0 : Math.sin(now / 650) * 0.1;
+        var bob = (dragging || box.spin) ? 0 : Math.sin(now / 650) * 0.1;
+        if (box.spin) spinAngle += 0.02;
         ctx.clearRect(0, 0, W, H);
         for (var gx = 0; gx < N; gx++)for (var gy = 0; gy < N; gy++) { var p0 = iso(gx, gy, 0), p1 = iso(gx + 1, gy, 0), p2 = iso(gx + 1, gy + 1, 0), p3 = iso(gx, gy + 1, 0); ctx.beginPath(); ctx.moveTo(p0[0], p0[1]); ctx.lineTo(p1[0], p1[1]); ctx.lineTo(p2[0], p2[1]); ctx.lineTo(p3[0], p3[1]); ctx.closePath(); ctx.fillStyle = ((gx + gy) % 2) ? "rgba(27,176,171,0.05)" : "rgba(27,176,171,0.02)"; ctx.fill(); ctx.strokeStyle = "rgba(27,176,171,0.18)"; ctx.lineWidth = 1; ctx.stroke(); }
-        var s = box.size, z = box.z + bob, gx = box.gx, gy = box.gy, h = s, col = box.color;
-        function P(dx, dy, dz) { return iso(gx + dx, gy + dy, z + dz); }
-        var s0 = iso(gx, gy, 0), s1 = iso(gx + s, gy, 0), s2 = iso(gx + s, gy + s, 0), s3 = iso(gx, gy + s, 0);
-        ctx.beginPath(); ctx.moveTo(s0[0], s0[1]); ctx.lineTo(s1[0], s1[1]); ctx.lineTo(s2[0], s2[1]); ctx.lineTo(s3[0], s3[1]); ctx.closePath(); ctx.fillStyle = "rgba(0,0,0,0.28)"; ctx.fill();
-        function face(a, b, c, d, fill) { ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.lineTo(c[0], c[1]); ctx.lineTo(d[0], d[1]); ctx.closePath(); ctx.fillStyle = fill; ctx.fill(); ctx.strokeStyle = "rgba(0,0,0,0.35)"; ctx.lineWidth = 1; ctx.stroke(); }
-        face(P(0, s, h), P(s, s, h), P(s, s, 0), P(0, s, 0), shade(col, 0.62));
-        face(P(s, 0, h), P(s, s, h), P(s, s, 0), P(s, 0, 0), shade(col, 0.82));
-        face(P(0, 0, h), P(s, 0, h), P(s, s, h), P(0, s, h), shade(col, 1.12));
+        // build the 8 cube corners (yaw-rotated around the box centre)
+        var s = box.size, z = box.z + bob, half = s / 2, ccx = box.gx + half, ccy = box.gy + half;
+        var sa = box.spin ? spinAngle : 0, cosA = Math.cos(sa), sinA = Math.sin(sa);
+        function wc(dx, dy, dz) { var ox = dx - half, oy = dy - half; return { x: ccx + (ox * cosA - oy * sinA), y: ccy + (ox * sinA + oy * cosA), z: z + dz }; }
+        var C = [wc(0, 0, 0), wc(s, 0, 0), wc(s, s, 0), wc(0, s, 0), wc(0, 0, s), wc(s, 0, s), wc(s, s, s), wc(0, s, s)];
+        // ground shadow
+        var g0 = iso(C[0].x, C[0].y, 0), g1 = iso(C[1].x, C[1].y, 0), g2 = iso(C[2].x, C[2].y, 0), g3 = iso(C[3].x, C[3].y, 0);
+        ctx.beginPath(); ctx.moveTo(g0[0], g0[1]); ctx.lineTo(g1[0], g1[1]); ctx.lineTo(g2[0], g2[1]); ctx.lineTo(g3[0], g3[1]); ctx.closePath(); ctx.fillStyle = "rgba(0,0,0,0.28)"; ctx.fill();
+        // top + 4 sides, lit by orientation, painted far-to-near
+        var FS = [[4, 5, 6, 7], [0, 1, 5, 4], [1, 2, 6, 5], [2, 3, 7, 6], [3, 0, 4, 7]];
+        FS.map(function (f) {
+          var a = C[f[0]], b = C[f[1]], c = C[f[2]];
+          var ux = b.x - a.x, uy = b.y - a.y, uz = b.z - a.z, vx = c.x - b.x, vy = c.y - b.y, vz = c.z - b.z;
+          var nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx, nl = Math.hypot(nx, ny, nz) || 1;
+          var lit = 0.5 + 0.55 * Math.abs((nx / nl) * L[0] + (ny / nl) * L[1] + (nz / nl) * L[2]);
+          var d = 0; f.forEach(function (i) { d += C[i].x + C[i].y + C[i].z; });
+          return { f: f, d: d / 4, lit: lit };
+        }).sort(function (a, b) { return a.d - b.d; }).forEach(function (o) {
+          ctx.beginPath(); o.f.forEach(function (i, j) { var p = iso(C[i].x, C[i].y, C[i].z); j ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]); }); ctx.closePath();
+          ctx.fillStyle = shade(box.color, o.lit); ctx.fill(); ctx.strokeStyle = "rgba(0,0,0,0.35)"; ctx.lineWidth = 1; ctx.stroke();
+        });
         requestAnimationFrame(draw);
       }
       requestAnimationFrame(draw);
+
       var cX = document.getElementById("c-x"), cY = document.getElementById("c-y"), cZ = document.getElementById("c-z"), cS = document.getElementById("c-s"), cC = document.getElementById("c-c");
       var vX = document.getElementById("v-x"), vY = document.getElementById("v-y"), vZ = document.getElementById("v-z"), vS = document.getElementById("v-s"), vC = document.getElementById("v-c");
       function syncLabels() { vX.textContent = box.gx.toFixed(1); vY.textContent = box.gy.toFixed(1); vZ.textContent = box.z.toFixed(1); if (vS) vS.textContent = box.size.toFixed(2); vC.textContent = box.color; }
@@ -2584,12 +2548,58 @@
       if (cS) cS.addEventListener("input", function () { box.size = +cS.value; cX.max = cY.max = (N - box.size).toFixed(2); syncLabels(); });
       cC.addEventListener("input", function () { box.color = cC.value; syncLabels(); });
       document.querySelectorAll("#swatches button").forEach(function (b) { b.addEventListener("click", function () { box.color = b.dataset.c; syncInputs(); syncLabels(); }); });
-      document.getElementById("iso-reset").addEventListener("click", function () { box = Object.assign({}, DEF); syncInputs(); syncLabels(); });
       cv.addEventListener("pointerdown", function (e) { var r = cv.getBoundingClientRect(); var g = s2g(e.clientX - r.left, e.clientY - r.top + box.z * LIFT); if (g[0] > box.gx - 0.8 && g[0] < box.gx + box.size + 0.8 && g[1] > box.gy - 0.8 && g[1] < box.gy + box.size + 0.8) { dragging = true; cv.setPointerCapture(e.pointerId); } });
       cv.addEventListener("pointermove", function (e) { if (!dragging) return; var r = cv.getBoundingClientRect(); var g = s2g(e.clientX - r.left, e.clientY - r.top + box.z * LIFT); var mx = N - box.size; box.gx = Math.max(0, Math.min(mx, g[0] - box.size / 2)); box.gy = Math.max(0, Math.min(mx, g[1] - box.size / 2)); syncInputs(); syncLabels(); });
       cv.addEventListener("pointerup", function () { dragging = false; });
       cv.addEventListener("pointercancel", function () { dragging = false; });
       syncLabels();
+
+      /* ---- code editor drives the box ---- */
+      var STARTER =
+        "// this code actually runs the box →\n" +
+        "box.size = 1.2;\n" +
+        "box.color = \"#f2a03d\";\n" +
+        "box.elevation = 1;\n" +
+        "box.position(2, 2);\n" +
+        "box.spin(true);";
+      var editor = document.getElementById("code-edit");
+      var consoleEl = document.getElementById("studio-console");
+      var hlEl = document.getElementById("code-hl");
+      function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+      function hl(src) {
+        var re = /(\/\/[^\n]*|\/\*[\s\S]*?\*\/)|("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')|\b(\d+\.?\d*)\b|\b(box|true|false|let|const|var|function|if|else|return|new)\b/g;
+        var out = "", last = 0, m;
+        while (m = re.exec(src)) {
+          out += esc(src.slice(last, m.index));
+          if (m[1]) out += '<span class="tk-com">' + esc(m[1]) + '</span>';
+          else if (m[2]) out += '<span class="tk-str">' + esc(m[2]) + '</span>';
+          else if (m[3]) out += '<span class="tk-num">' + esc(m[3]) + '</span>';
+          else out += '<span class="' + (m[4] === "box" ? "tk-type" : "tk-key") + '">' + esc(m[4]) + '</span>';
+          last = re.lastIndex;
+        }
+        out += esc(src.slice(last)); return out;
+      }
+      function refresh() { if (hlEl) hlEl.innerHTML = hl(editor.value) + "\n"; }
+      function clamp(v, lo, hi) { v = +v; if (isNaN(v)) return lo; return Math.max(lo, Math.min(hi, v)); }
+      function log(msg, cls) { if (!consoleEl) return; var d = document.createElement("div"); d.className = "cl"; d.innerHTML = (cls === "err" ? "<span style='color:#e08a8a'>error</span>" : "<span class='ok'>ok</span>") + " — " + msg; consoleEl.appendChild(d); consoleEl.scrollTop = consoleEl.scrollHeight; }
+      function runCode() {
+        if (!editor) return;
+        var api = {
+          set size(v) { box.size = clamp(v, 0.6, 1.6); cX.max = cY.max = (N - box.size).toFixed(2); }, get size() { return box.size; },
+          set color(v) { if (/^#[0-9a-fA-F]{6}$/.test(v)) box.color = v; }, get color() { return box.color; },
+          set elevation(v) { box.z = clamp(v, 0, 3); }, get elevation() { return box.z; },
+          position: function (x, y) { var mx = N - box.size; box.gx = clamp(x, 0, mx); box.gy = clamp(y, 0, mx); },
+          spin: function (on) { box.spin = (on !== false); }
+        };
+        try { box.spin = false; new Function("box", "\"use strict\";" + editor.value)(api); syncInputs(); syncLabels(); log("ran — box updated"); }
+        catch (err) { log(String(err.message || err), "err"); }
+      }
+      editor.addEventListener("input", refresh);
+      editor.addEventListener("scroll", function () { if (hlEl) { hlEl.scrollTop = editor.scrollTop; hlEl.scrollLeft = editor.scrollLeft; } });
+      editor.addEventListener("keydown", function (e) { if ((e.ctrlKey || e.metaKey) && e.key === "Enter") { e.preventDefault(); runCode(); } });
+      document.getElementById("iso-reset").addEventListener("click", function () { box = Object.assign({}, DEF); spinAngle = 0; syncInputs(); syncLabels(); editor.value = STARTER; refresh(); });
+      var runBtn = document.getElementById("run-code"); if (runBtn) runBtn.addEventListener("click", runCode);
+      editor.value = STARTER; refresh(); runCode();
     })();
 
     /* ===== TERMINAL ===== */
